@@ -1,27 +1,21 @@
 package ressource;
-import java.util.Vector;
 
-import element.Element;
+public abstract class Ressource {
 
-public abstract class Ressource extends Element {
+	public int quantite;
 
-  public Integer quantite;
+	public int qualite;
 
-  public Integer qualite;
+	public void reduireQt() {
+	}
 
-    public Vector  myTerrain;
-    public Vector  myVivant;
+	public void augmenterQt() {
+	}
 
-  public void reduireQt() {
-  }
+	public void reduireQual() {
+	}
 
-  public void augmenterQt() {
-  }
-
-  public void reduireQual() {
-  }
-
-  public void augmenterQual() {
-  }
+	public void augmenterQual() {
+	}
 
 }
