@@ -1,5 +1,6 @@
 package element;
 
+import main.TestProcessing;
 import processing.core.PApplet;
 import processing.core.PShape;
 import processing.core.PVector;
@@ -19,18 +20,17 @@ public abstract class Element {
 
 	public void display() {
 		parent.pushMatrix();
-		double st = Math.sin(theta);
-
+		
+		/*double st = Math.sin(theta);
 		float newX = (float)(r*st*Math.cos(phi));
 		float newY = (float)(r*st*Math.sin(phi));
 		float newZ = (float)(r*Math.cos(theta));
-
-		parent.translate(newX, newY, newZ);
-		//double racine = Math.sqrt(newX*newX+newZ*newZ);
-		PVector new_vector = new PVector(newX, newY, newZ).normalize();
-		parent.rotateX((float) Math.atan(new_vector.z));
-		parent.rotateZ((float) Math.acos(new_vector.y));
-
+		parent.translate(newX, newY, newZ);*/
+		
+		parent.rotateY((float) theta);
+		parent.rotateX((float) phi);
+		parent.translate(0, 0, TestProcessing.RAYON);
+		
 		parent.shape(model,0,0);
 		parent.popMatrix();
 	}

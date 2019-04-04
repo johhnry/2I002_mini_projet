@@ -2,18 +2,25 @@ package amenagement;
 import java.util.Vector;
 
 import element.Element;
+import processing.core.PApplet;
+import processing.core.PShape;
 import ressource.Ressource;
 
 public abstract class Amenagement extends Element {
 
-  public Ressource useRessources;
+	public Amenagement(PApplet parent, PShape model, double r, double theta, double phi) {
+		super(parent, model, r, theta, phi);
+		// TODO Auto-generated constructor stub
+	}
 
-  public Ressource impactRessources;
+	public Ressource useRessources;
 
-  public Integer qtUseRessources;
+	public Ressource impactRessources;
 
-  public Integer qtImpactRessources;
+	public Integer qtUseRessources;
 
-    public Vector  myTerrain;
+	public Integer qtImpactRessources;
+
+	public Vector  myTerrain;
 
 }
