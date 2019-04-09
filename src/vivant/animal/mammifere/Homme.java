@@ -1,35 +1,55 @@
 package vivant.animal.mammifere;
 
+import amenagement.domestique.Cimetiere;
 import processing.core.PApplet;
-import processing.core.PShape;
 import ressource.Air;
-import ressource.Eau;
-import ressource.Nourriture;
-import ressource.Ressource;
+import terrain.Terrain;
 
 public class Homme extends Mammifere {
-	public Homme(PApplet parent, PShape model, double r, double theta, double phi) {
-		super(parent, model, r, theta, phi);
+	private static final String filename = "homme.obj";
+	private static int cptHumain = 0;
+	
+	public Homme(PApplet parent, Terrain terrain, double theta, double phi) {
+		super(parent, terrain, filename, theta, phi);
+		old = Math.random()/100 + 0.001;
+		cptHumain++;
+	}
+	
+	public Homme(PApplet parent, Terrain terrain) {
+		super(parent, terrain, filename);
+		old = Math.random()/100 + 0.001;
+		cptHumain++;
+	}
+
+	public void respirer() {
+		Air air = this.terrain.getAir();
+		air.reduireQt(0.5);
+		air.reduireQual(0.001);
+	}
+
+	public void manger() {
+		this.terrain.getNourriture().reduireQt(0.03);
+	}
+
+	public void boire() {
+		this.terrain.getEau().reduireQt(1);
 	}
 
 	public void move() {
 		
 	}
-
-	public void respirer(Air air) {
-		// TODO Auto-generated method stub
-		
+	
+	public boolean update() {
+		updateVivant();
+		if (!estVivant()) {
+			terrain.addElement(new Cimetiere(parent, terrain, this.theta, this.phi));
+			terrain.getMineral().augmenterQt(2);
+			return false;
+		}
+		return true;
 	}
-
-	@Override
-	public void manger(Ressource r) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void boire(Eau eau) {
-		// TODO Auto-generated method stub
-		
+	
+	public static int getCptHumain() {
+		return cptHumain;
 	}
 }

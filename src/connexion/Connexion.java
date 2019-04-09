@@ -2,13 +2,12 @@ package connexion;
 import java.util.ArrayList;
 import amenagement.Amenagement;
 import processing.core.PApplet;
-import processing.core.PShape;
+import terrain.Terrain;
 
 public abstract class Connexion extends Amenagement {
-	public Connexion(PApplet parent, PShape model, double r, double theta, double phi) {
-		super(parent, model, r, theta, phi);
-		// TODO Auto-generated constructor stub
-	}
-
 	private ArrayList<Amenagement> listeVilles;
+	
+	public Connexion(PApplet parent, Terrain terrain, String filename, double theta, double phi) {
+		super(parent, terrain, filename, theta, phi);
+	}
 }

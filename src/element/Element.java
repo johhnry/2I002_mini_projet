@@ -1,51 +1,48 @@
 package element;
 
-import main.TestProcessing;
 import processing.core.PApplet;
 import processing.core.PShape;
-import processing.core.PVector;
+import terrain.Terrain;
 
 public abstract class Element {
-	private PApplet parent;
+	protected PApplet parent;
+	protected Terrain terrain;
 	private PShape model;
-	private double r, theta, phi;
+	protected double theta;
+	protected double phi;
+	private int r;
 
-	public Element(PApplet parent, PShape model, double r, double theta, double phi) {
+	public Element(PApplet parent, Terrain terrain, String filename, double theta, double phi) {
 		this.parent = parent;
-		this.model = model;
-		this.r = r;
+		this.terrain = terrain;
+		
+		this.loadModel(filename);
+		
+		this.r = terrain.getRayon();
 		this.theta = theta;
 		this.phi = phi;
 	}
 
+	public Element(PApplet parent, Terrain terrain, String filename) {
+		this(parent, terrain, filename, Math.random()*(Math.PI*2), Math.random()*(Math.PI*2));
+	}
+
 	public void display() {
-		parent.pushMatrix();
-		
-		/*double st = Math.sin(theta);
-		float newX = (float)(r*st*Math.cos(phi));
-		float newY = (float)(r*st*Math.sin(phi));
-		float newZ = (float)(r*Math.cos(theta));
-		parent.translate(newX, newY, newZ);*/
-		
-		parent.rotateY((float) theta);
-		parent.rotateX((float) phi);
-		parent.translate(0, 0, TestProcessing.RAYON);
-		
-		parent.shape(model,0,0);
-		parent.popMatrix();
-	}
-
-	public float getR() {
-		return (float) r;
-	}
-
-	public void setR(float r) {
-		this.r = r;
+		if (model != null) {
+			parent.pushMatrix();
+			parent.rotateY((float) theta);
+			parent.rotateX((float) phi);
+			parent.translate(0, 0, r);
+			parent.shape(model,0,0);
+			parent.popMatrix();
+		}
 	}
 
 	public float getPhi() {
 		return (float)phi;
 	}
+
+	public abstract boolean update();
 
 	public void setPhi(double d) {
 		this.phi = d;
@@ -57,5 +54,13 @@ public abstract class Element {
 
 	public void setTheta(double d) {
 		this.theta = d;
+	}
+	
+	public void loadModel(String filename) {
+		if (filename != "") {
+			this.model = parent.loadShape("models/"+filename);
+		}else {
+			this.model = null;
+		}
 	}
 }

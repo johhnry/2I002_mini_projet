@@ -5,11 +5,12 @@ import processing.core.PShape;
 import ressource.Air;
 import ressource.Eau;
 import ressource.Ressource;
+import terrain.Terrain;
 
 public class Elephant extends Mammifere {
 
-	public Elephant(PApplet parent, PShape model, double r, double theta, double phi) {
-		super(parent, model, r, theta, phi);
+	public Elephant(PApplet parent, Terrain terrain, String filename, double theta, double phi) {
+		super(parent, terrain, filename, theta, phi);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -20,20 +21,26 @@ public class Elephant extends Mammifere {
 	}
 
 	@Override
-	public void respirer(Air air) {
+	public void respirer() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void manger(Ressource r) {
+	public void manger() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void boire(Eau eau) {
+	public void boire() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public boolean update() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

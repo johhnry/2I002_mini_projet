@@ -1,12 +1,29 @@
 package connexion;
 
 import processing.core.PApplet;
-import processing.core.PShape;
+import terrain.Terrain;
 
 public class LigneAerienne extends Connexion {
 
-	public LigneAerienne(PApplet parent, PShape model, double r, double theta, double phi) {
-		super(parent, model, r, theta, phi);
-		// TODO Auto-generated constructor stub
+	public LigneAerienne(PApplet parent, Terrain terrain, String filename, double theta, double phi) {
+		super(parent, terrain, filename, theta, phi);
+	}
+
+	@Override
+	public void utiliser() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void rejeter() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean update() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

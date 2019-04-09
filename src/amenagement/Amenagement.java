@@ -1,26 +1,24 @@
 package amenagement;
-import java.util.Vector;
 
 import element.Element;
 import processing.core.PApplet;
-import processing.core.PShape;
-import ressource.Ressource;
+import terrain.Terrain;
 
-public abstract class Amenagement extends Element {
-
-	public Amenagement(PApplet parent, PShape model, double r, double theta, double phi) {
-		super(parent, model, r, theta, phi);
-		// TODO Auto-generated constructor stub
+public abstract class Amenagement extends Element implements Consommer{
+	protected boolean destroy = false;
+	
+	public Amenagement(PApplet parent, Terrain terrain, String filename, double theta, double phi) {
+		super(parent, terrain, filename, theta, phi);
 	}
-
-	public Ressource useRessources;
-
-	public Ressource impactRessources;
-
-	public Integer qtUseRessources;
-
-	public Integer qtImpactRessources;
-
-	public Vector  myTerrain;
-
+	
+	public Amenagement(PApplet parent, Terrain terrain, String filename) {
+		super(parent, terrain, filename);
+	}
+	
+	public void destroy(String filename) {
+		if(!destroy) {
+			this.loadModel(filename);
+			destroy = true;
+		}
+	}
 }

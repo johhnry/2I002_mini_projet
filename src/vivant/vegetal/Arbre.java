@@ -1,34 +1,33 @@
 package vivant.vegetal;
 
 import processing.core.PApplet;
-import processing.core.PShape;
-import ressource.Air;
-import ressource.Eau;
-import ressource.Nourriture;
-import ressource.Ressource;
+import terrain.Terrain;
 
 public class Arbre extends Vegetal {
+	private static String filename = "arbre.obj";
 
-	public Arbre(PApplet parent, PShape model, double r, double theta, double phi) {
-		super(parent, model, r, theta, phi);
-		// TODO Auto-generated constructor stub
+	public Arbre(PApplet parent, Terrain terrain, double theta, double phi) {
+		super(parent, terrain, filename, theta, phi);
 	}
 
-	@Override
-	public void respirer(Air air) {
-		// TODO Auto-generated method stub
-		
+	public void respirer() {
+		terrain.getAir().augmenterQual(0.1);
 	}
 
-	@Override
-	public void manger(Ressource r) {
-		// TODO Auto-generated method stub
-		
+	public void manger() {
+		terrain.getMineral().reduireQt(0.5);
 	}
 
-	@Override
-	public void boire(Eau eau) {
-		// TODO Auto-generated method stub
-		
+	public void boire() {
+		terrain.getEau().reduireQt(0.09);
+	}
+
+	public boolean update() {
+		updateVivant();
+		if (!estVivant()) {
+			terrain.getMineral().augmenterQt(3);
+			return false;
+		}
+		return true;
 	}
 }

@@ -3,5 +3,5 @@ package vivant;
 import ressource.Air;
 
 public interface Respirer {
-	public void respirer(Air air);
+	public void respirer();
 }

@@ -1,15 +1,20 @@
 package vivant.animal;
+
 import processing.core.PApplet;
-import processing.core.PShape;
+import terrain.Terrain;
 import vivant.Vivant;
 
 public abstract class Animal extends Vivant implements Deplacable {
-	public Animal(PApplet parent, PShape model, double r, double theta, double phi) {
-		super(parent, model, r, theta, phi);
+	public Animal(PApplet parent, Terrain terrain,String filename, double theta, double phi) {
+		super(parent, terrain,filename, theta, phi);
+	}
+
+	public Animal(PApplet parent, Terrain terrain, String filename) {
+		super(parent, terrain, filename);
 	}
 
 	public void move(double t, double p) {
-		this.setPhi(this.getPhi()+t);
-		this.setTheta(this.getTheta()+p);
+		this.setPhi(phi+t);
+		this.setTheta(theta+p);
 	}
 }

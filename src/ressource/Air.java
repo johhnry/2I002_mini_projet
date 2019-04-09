@@ -1,8 +1,11 @@
 package ressource;
-import java.util.Vector;
 
 public class Air extends Ressource {
-
-    public Vector  myVivant;
-
+	public Air() {
+		super(50000, 1);
+	}
+	
+	public String toString() {
+		return "Air ("+super.toString()+")";
+	}
 }
