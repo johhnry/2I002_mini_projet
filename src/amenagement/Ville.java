@@ -24,8 +24,6 @@ public class Ville extends Amenagement {
 		super(parent, terrain, "");
 		this.addDomestique();
 		this.id = ++cptVille;
-		
-		System.out.println("Capacite : "+capacite);
 	}
 	
 	public void display() {
@@ -66,9 +64,7 @@ public class Ville extends Amenagement {
 			if (this.listDomestiques.size() < this.capacite) {
 				//On ajoute dans la ville
 				this.addDomestique();
-				System.out.println(this.id + " " + cptVille);
 			}else if(this.id == cptVille){
-				System.out.println("ici");
 				//On créé une nouvelle ville
 				terrain.addElement(new Ville(parent, terrain));
 			}

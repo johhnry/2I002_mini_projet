@@ -17,14 +17,14 @@ public class Homme extends Mammifere {
 	
 	public Homme(PApplet parent, Terrain terrain) {
 		super(parent, terrain, filename);
-		old = Math.random()/100 + 0.001;
+		old = Math.random()/500 + 0.001;
 		cptHumain++;
 	}
 
 	public void respirer() {
 		Air air = this.terrain.getAir();
 		air.reduireQt(0.5);
-		air.reduireQual(0.001);
+		air.reduireQual(0.00001);
 	}
 
 	public void manger() {
@@ -33,10 +33,6 @@ public class Homme extends Mammifere {
 
 	public void boire() {
 		this.terrain.getEau().reduireQt(1);
-	}
-
-	public void move() {
-		
 	}
 	
 	public boolean update() {

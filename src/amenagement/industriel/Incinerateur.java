@@ -5,7 +5,7 @@ import terrain.Terrain;
 
 public class Incinerateur extends Industriel {
 	private static String filename = "incinerateur.obj";
-	private static String filename_destroy = "incinerateur_destroy.obj";
+	//private static String filename_destroy = "incinerateur_destroy.obj";
 
 	public Incinerateur(PApplet parent, Terrain terrain, double theta, double phi) {
 		super(parent, terrain, filename, theta, phi);

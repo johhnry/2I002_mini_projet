@@ -11,18 +11,18 @@ public class Aigle extends Oiseau {
 	//duree de vie environ 30 ans
 	public Aigle(PApplet parent, Terrain terrain, double theta, double phi) {
 		super(parent, terrain, filename, theta, phi);
-		old = Math.random()/50 + 0.001;
+		old = Math.random()/200 + 0.001;
 	}
 	
 	public Aigle(PApplet parent, Terrain terrain) {
-		super(parent, terrain, filename, 50);
-		old = Math.random()/50 + 0.001;
+		super(parent, terrain, filename, 20);
+		old = Math.random()/200 + 0.001;
 	}
 
 	public void respirer() {
 		Air air = this.terrain.getAir();
 		air.reduireQt(0.1);
-		air.reduireQual(0.001);
+		air.reduireQual(0.0001);
 	}
 
 	public void manger() {
@@ -33,9 +33,9 @@ public class Aigle extends Oiseau {
 		this.terrain.getEau().reduireQt(1);
 	}
 
-	public void move() {
+	/*public void move() {
 		
-	}
+	}*/
 	
 	public boolean update() {
 		updateVivant();

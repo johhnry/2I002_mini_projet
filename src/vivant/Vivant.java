@@ -26,6 +26,6 @@ public abstract class Vivant extends Element implements Respirer, Sustenter {
 		respirer();
 		if (Math.random() < pSustenter) manger();
 		if (Math.random() < pBoire) boire();
-		this.ptsVie -= (1-terrain.getMoyenneRessources())/10 + this.old;
+		this.ptsVie -= (1-terrain.getMoyenneRessources())/1000 + this.old;
 	}
 }

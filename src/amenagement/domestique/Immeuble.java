@@ -17,7 +17,7 @@ public class Immeuble extends Domestique {
 
 	@Override
 	public void utiliser() {
-		terrain.getEau().reduireQt(this.capacite*0.5);
+		terrain.getEau().reduireQt(this.capacite*0.1);
 	}
 
 	@Override
@@ -29,7 +29,7 @@ public class Immeuble extends Domestique {
 	@Override
 	public boolean update() {
 		utiliser();
-		rejeter();
+		if (parent.frameCount%50==0) rejeter();
 		return true;
 	}
 }

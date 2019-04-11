@@ -2,11 +2,17 @@ package ressource;
 
 public class Mineral extends Ressource {
 	
+	private static int qtInitMineral = 1000000;
+	
 	public Mineral() {
-		super(1000000, 1);
+		super(qtInitMineral, 1);
 	}
 	
 	public String toString() {
 		return "Mineral ("+super.toString()+")";
+	}
+	
+	public static int getqtInitMineral() {
+		return qtInitMineral;
 	}
 }
