@@ -11,12 +11,12 @@ public class Crocodile extends Reptile {
 	//duree de vie environ 20 ans
 	public Crocodile(PApplet parent, Terrain terrain, double theta, double phi) {
 		super(parent, terrain, filename, theta, phi);
-		old = Math.random()/40 + 0.001;
+		old = Math.random()/200 + 0.001;
 	}
 	
 	public Crocodile(PApplet parent, Terrain terrain) {
 		super(parent, terrain, filename);
-		old = Math.random()/40 + 0.001;
+		old = Math.random()/200 + 0.001;
 	}
 
 	public void respirer() {
@@ -31,10 +31,6 @@ public class Crocodile extends Reptile {
 
 	public void boire() {
 		this.terrain.getEau().reduireQt(1);
-	}
-
-	public void move() {
-		
 	}
 	
 	public boolean update() {

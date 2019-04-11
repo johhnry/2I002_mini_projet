@@ -1,6 +1,7 @@
 package main;
 
 import processing.core.PApplet;
+import terrain.Soleil;
 import terrain.Terrain;
 import peasy.PeasyCam;
 import gui.Options;
@@ -12,6 +13,7 @@ public class Simulation extends PApplet{
 	private Terrain terrain;
 	private ControlP5 cp5;
 	private Options options;
+	private Soleil soleil;
 	
 	public static void main(String[] args) {
 		PApplet.main("main.Simulation");
@@ -27,6 +29,7 @@ public class Simulation extends PApplet{
 		//Initialization
 		camera = new PeasyCam(this, width/2, height/2, 0, 400);
 		terrain = new Terrain(this,  width/2, height/2, 0, 100);
+		soleil = new Soleil(this, terrain, HALF_PI);
 		cp5 = new ControlP5(this);
 		cp5.setAutoDraw(false);
 		cp5.setFont(createFont("font/uni0553-webfont.ttf", 12));
@@ -46,6 +49,7 @@ public class Simulation extends PApplet{
 		background(0);
 		
 		//Afficher le terrain
+		soleil.display();
 		terrain.display();
 		
 		//GUI
@@ -56,6 +60,7 @@ public class Simulation extends PApplet{
 		
 		//Update du terrain
 		terrain.update();
+		soleil.update();
 	}
 	
 	//Debug function
