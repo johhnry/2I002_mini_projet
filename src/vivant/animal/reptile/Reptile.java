@@ -1,12 +1,15 @@
 package vivant.animal.reptile;
 import processing.core.PApplet;
-import processing.core.PShape;
+import terrain.Terrain;
 import vivant.animal.Animal;
 
 public abstract class Reptile extends Animal {
-
-	public Reptile(PApplet parent, PShape model, double r, double theta, double phi) {
-		super(parent, model, r, theta, phi);
-		// TODO Auto-generated constructor stub
+	
+	public Reptile(PApplet parent, Terrain terrain, String filename, double theta, double phi) {
+		super(parent, terrain, filename, theta, phi);
+	}
+	
+	public Reptile(PApplet parent, Terrain terrain , String filename) {
+		super(parent, terrain, filename);
 	}
 }

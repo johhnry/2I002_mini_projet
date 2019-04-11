@@ -10,7 +10,7 @@ public abstract class Element {
 	private PShape model;
 	protected double theta;
 	protected double phi;
-	private int r;
+	protected int r;
 
 	public Element(PApplet parent, Terrain terrain, String filename, double theta, double phi) {
 		this.parent = parent;

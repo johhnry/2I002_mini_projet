@@ -1,40 +1,48 @@
 package vivant.animal.reptile;
 
 import processing.core.PApplet;
-import processing.core.PShape;
 import ressource.Air;
-import ressource.Eau;
-import ressource.Nourriture;
-import ressource.Ressource;
+import terrain.Terrain;
 
 public class Crocodile extends Reptile {
 
-	public Crocodile(PApplet parent, PShape model, double r, double theta, double phi) {
-		super(parent, model, r, theta, phi);
-		// TODO Auto-generated constructor stub
+	private static final String filename = "crocodile.obj";
+	
+	//duree de vie environ 20 ans
+	public Crocodile(PApplet parent, Terrain terrain, double theta, double phi) {
+		super(parent, terrain, filename, theta, phi);
+		old = Math.random()/40 + 0.001;
+	}
+	
+	public Crocodile(PApplet parent, Terrain terrain) {
+		super(parent, terrain, filename);
+		old = Math.random()/40 + 0.001;
 	}
 
-	@Override
+	public void respirer() {
+		Air air = this.terrain.getAir();
+		air.reduireQt(0.15);
+		air.reduireQual(0.002);
+	}
+
+	public void manger() {
+		this.terrain.getNourriture().reduireQt(0.06);
+	}
+
+	public void boire() {
+		this.terrain.getEau().reduireQt(1);
+	}
+
 	public void move() {
-		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public void respirer(Air air) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void manger(Ressource r) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void boire(Eau eau) {
-		// TODO Auto-generated method stub
-		
+	
+	public boolean update() {
+		updateVivant();
+		if (!estVivant()) {
+			terrain.getMineral().augmenterQt(3);
+			return false;
+		}
+		return true;
 	}
 }

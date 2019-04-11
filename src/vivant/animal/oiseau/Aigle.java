@@ -1,40 +1,48 @@
 package vivant.animal.oiseau;
 
 import processing.core.PApplet;
-import processing.core.PShape;
 import ressource.Air;
-import ressource.Eau;
-import ressource.Nourriture;
-import ressource.Ressource;
+import terrain.Terrain;
 
 public class Aigle extends Oiseau {
 
-	public Aigle(PApplet parent, PShape model, double r, double theta, double phi) {
-		super(parent, model, r, theta, phi);
-		// TODO Auto-generated constructor stub
+	private static final String filename = "aigle.obj";
+	
+	//duree de vie environ 30 ans
+	public Aigle(PApplet parent, Terrain terrain, double theta, double phi) {
+		super(parent, terrain, filename, theta, phi);
+		old = Math.random()/50 + 0.001;
+	}
+	
+	public Aigle(PApplet parent, Terrain terrain) {
+		super(parent, terrain, filename, 50);
+		old = Math.random()/50 + 0.001;
 	}
 
-	@Override
+	public void respirer() {
+		Air air = this.terrain.getAir();
+		air.reduireQt(0.1);
+		air.reduireQual(0.001);
+	}
+
+	public void manger() {
+		this.terrain.getNourriture().reduireQt(0.01);
+	}
+
+	public void boire() {
+		this.terrain.getEau().reduireQt(1);
+	}
+
 	public void move() {
-		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public void respirer(Air air) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void manger(Ressource r) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void boire(Eau eau) {
-		// TODO Auto-generated method stub
-		
+	
+	public boolean update() {
+		updateVivant();
+		if (!estVivant()) {
+			terrain.getMineral().augmenterQt(0.5);
+			return false;
+		}
+		return true;
 	}
 }

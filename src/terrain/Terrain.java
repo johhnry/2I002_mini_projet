@@ -7,6 +7,7 @@ import element.Element;
 import peasy.PeasyCam;
 import processing.core.PApplet;
 import ressource.*;
+import vivant.animal.oiseau.Colibri;
 
 public class Terrain {
 	private PApplet parent;
@@ -66,6 +67,7 @@ public class Terrain {
 	
 	public void init() {
 		addElement(new Ville(parent, this));
+		addElement(new Colibri(parent, this));
 	}
 	
 	public int getRayon() {

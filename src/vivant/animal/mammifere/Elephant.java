@@ -1,46 +1,47 @@
 package vivant.animal.mammifere;
 
 import processing.core.PApplet;
-import processing.core.PShape;
 import ressource.Air;
-import ressource.Eau;
-import ressource.Ressource;
 import terrain.Terrain;
 
 public class Elephant extends Mammifere {
-
-	public Elephant(PApplet parent, Terrain terrain, String filename, double theta, double phi) {
+	private static final String filename = "elephant.obj";
+	
+	//duree de vie environ 60 ans
+	public Elephant(PApplet parent, Terrain terrain, double theta, double phi) {
 		super(parent, terrain, filename, theta, phi);
-		// TODO Auto-generated constructor stub
+		old = Math.random()/100 + 0.001;
+	}
+	
+	public Elephant(PApplet parent, Terrain terrain) {
+		super(parent, terrain, filename);
+		old = Math.random()/100 + 0.001;
 	}
 
-	@Override
-	public void move() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void respirer() {
-		// TODO Auto-generated method stub
-		
+		Air air = this.terrain.getAir();
+		air.reduireQt(0.6);
+		air.reduireQual(0.003);
 	}
 
-	@Override
 	public void manger() {
-		// TODO Auto-generated method stub
-		
+		this.terrain.getNourriture().reduireQt(0.08);
 	}
 
-	@Override
 	public void boire() {
-		// TODO Auto-generated method stub
-		
+		this.terrain.getEau().reduireQt(3);
 	}
 
-	@Override
+	public void move() {
+		
+	}
+	
 	public boolean update() {
-		// TODO Auto-generated method stub
-		return false;
+		updateVivant();
+		if (!estVivant()) {
+			terrain.getMineral().augmenterQt(2);
+			return false;
+		}
+		return true;
 	}
 }

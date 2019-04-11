@@ -1,11 +1,17 @@
 package vivant.animal.oiseau;
 import processing.core.PApplet;
-import processing.core.PShape;
+import terrain.Terrain;
 import vivant.animal.Animal;
 
 public abstract class Oiseau extends Animal {
 
-	public Oiseau(PApplet parent, PShape model, double r, double theta, double phi) {
-		super(parent, model, r+50, theta, phi);
+	public Oiseau(PApplet parent, Terrain terrain, String filename, double theta, double phi) {
+		super(parent, terrain, filename, theta, phi);
 	}
+	
+	public Oiseau(PApplet parent, Terrain terrain , String filename, int altitude) {
+		super(parent, terrain, filename);
+		this.r = terrain.getRayon()+altitude;
+	}
+	
 }
