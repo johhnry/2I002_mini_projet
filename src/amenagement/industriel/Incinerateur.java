@@ -11,6 +11,10 @@ public class Incinerateur extends Industriel {
 		super(parent, terrain, filename, theta, phi);
 	}
 
+	public Incinerateur(PApplet parent, Terrain terrain) {
+		super(parent, terrain, filename);
+	}
+
 	@Override
 	public void utiliser() {
 	}

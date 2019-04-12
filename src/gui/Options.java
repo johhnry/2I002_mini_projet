@@ -18,7 +18,6 @@ public class Options {
 	//Charts ressources
 	private Chart chartEau, chartAir, chartMineral, chartNourriture, chartRecensement;
 
-
 	public Options(PApplet parent, Terrain terrain, ControlP5 cp5, int cursorY) {
 		this.parent = parent;
 		this.terrain = terrain;
@@ -27,12 +26,12 @@ public class Options {
 	}
 
 	public void init() {
-		int widthGr = 300;
-
 		//-----------------------GROUP------------------------------------
+		int widthGr = 300;
+		int colorBckgGr = parent.color(200,100);
 		Group data = cp5.addGroup("ressources")
 				.setPosition(20,cursorY)
-				.setBackgroundColor(parent.color(200,100))
+				.setBackgroundColor(colorBckgGr)
 				.setWidth(widthGr)
 				.setBackgroundHeight(700)
 				.setBarHeight(20);
@@ -144,8 +143,51 @@ public class Options {
 				.setColors("vegetal", parent.color(55,128,29, alphaArea));
 
 		chartRecensement.getColor().setBackground(colorBckgC);
-		
-		
+
+
+		//-----------------------SLIDERS------------------------------------------------------
+		int widthGrSlider = 400;
+		/*Group sliders = cp5.addGroup("sliders")
+				.setPosition(parent.width-widthGrSlider-20,cursorY)
+				.setBackgroundColor(colorBckgGr)
+				.setWidth(widthGrSlider)
+				.setBackgroundHeight(700)
+				.setBarHeight(20);*/
+
+		int gapSGr = 20;
+		int marginSGr = 10;
+		int widthSgr = widthGrSlider-marginSGr*2;
+		int gapSlider = 20;
+		int marginSlider = 10;
+		int heightSlider = 25;
+
+		Group environment = cp5.addGroup("environment")
+				.setPosition(marginSGr,gapSGr+20)
+				.setBackgroundColor(colorBckgGr)
+				.setWidth(widthSgr)
+				.setBackgroundHeight(500)
+				.setBarHeight(20);
+
+		cp5.addSlider("sSpeed")
+		.setPosition(marginSlider, gapSlider)
+		.setSize(widthSgr - 10*marginSlider, heightSlider)
+		.setRange(1,20)
+		.setValue(1)
+		.setDecimalPrecision(0)
+		.setNumberOfTickMarks(10)
+		.setGroup(environment);
+
+		cp5.addColorWheel("sunColor")
+		.setPosition(marginSlider, gapSlider*2+heightSlider+10)
+		.setGroup(environment);
+
+		cp5.addAccordion("Options")
+		.setPosition(parent.width-widthGrSlider-20,cursorY)
+		.setWidth(widthGrSlider)
+		.setBackgroundColor(colorBckgGr)
+		.addItem(environment)
+		//.setCollapseMode()
+		;
 	}
 
 	public void update() {
@@ -154,7 +196,7 @@ public class Options {
 			//Chart recensement
 			HashMap<String, Integer> hash = terrain.getHashQuantities();
 			for(Entry<String, Integer> entry : hash.entrySet()) {
-			    chartRecensement.push(entry.getKey(), entry.getValue());
+				chartRecensement.push(entry.getKey(), entry.getValue());
 			}
 
 			//Charts ressources

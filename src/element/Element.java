@@ -1,6 +1,7 @@
 package element;
 
 import processing.core.PApplet;
+import processing.core.PConstants;
 import processing.core.PShape;
 import terrain.Terrain;
 
@@ -10,15 +11,15 @@ public abstract class Element {
 	private PShape model;
 	protected double theta;
 	protected double phi;
-	protected int r;
+	protected int altitude = 0;
+	protected double orient = 0;
 
 	public Element(PApplet parent, Terrain terrain, String filename, double theta, double phi) {
 		this.parent = parent;
 		this.terrain = terrain;
 		
 		this.loadModel(filename);
-		
-		this.r = terrain.getRayon();
+
 		this.theta = theta;
 		this.phi = phi;
 	}
@@ -32,7 +33,8 @@ public abstract class Element {
 			parent.pushMatrix();
 			parent.rotateY((float) theta);
 			parent.rotateX((float) phi);
-			parent.translate(0, 0, r);
+			parent.rotateZ(-PConstants.HALF_PI+(float)orient); 
+			parent.translate(0, 0, (terrain.getRayon()+this.altitude));
 			parent.shape(model,0,0);
 			parent.popMatrix();
 		}
@@ -54,6 +56,10 @@ public abstract class Element {
 
 	public void setTheta(double d) {
 		this.theta = d;
+	}
+	
+	public void setOrient(double dirX, double dirY) {
+		this.orient = Math.atan(dirY/dirX);
 	}
 	
 	public void loadModel(String filename) {

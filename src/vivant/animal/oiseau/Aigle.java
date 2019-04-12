@@ -5,8 +5,8 @@ import ressource.Air;
 import terrain.Terrain;
 
 public class Aigle extends Oiseau {
-
 	private static final String filename = "aigle.obj";
+	private static double pReprodAigle = 0.0009;
 	
 	//duree de vie environ 30 ans
 	public Aigle(PApplet parent, Terrain terrain, double theta, double phi) {
@@ -32,10 +32,6 @@ public class Aigle extends Oiseau {
 	public void boire() {
 		this.terrain.getEau().reduireQt(1);
 	}
-
-	/*public void move() {
-		
-	}*/
 	
 	public boolean update() {
 		updateVivant();
@@ -44,5 +40,11 @@ public class Aigle extends Oiseau {
 			return false;
 		}
 		return true;
+	}
+	
+	public void reproduce() {
+		if (Math.random() <= pReprodAigle) {
+			terrain.addElement(new Aigle(parent, terrain, theta, phi));
+		}
 	}
 }

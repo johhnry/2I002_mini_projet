@@ -8,6 +8,7 @@ import terrain.Terrain;
 public class Homme extends Mammifere {
 	private static final String filename = "homme.obj";
 	private static int cptHumain = 0;
+	private static double pReprodHomme = 0.001;
 	
 	public Homme(PApplet parent, Terrain terrain, double theta, double phi) {
 		super(parent, terrain, filename, theta, phi);
@@ -38,6 +39,7 @@ public class Homme extends Mammifere {
 	public boolean update() {
 		updateVivant();
 		if (!estVivant()) {
+			cptHumain--;
 			terrain.addElement(new Cimetiere(parent, terrain, this.theta, this.phi));
 			terrain.getMineral().augmenterQt(2);
 			return false;
@@ -47,5 +49,11 @@ public class Homme extends Mammifere {
 	
 	public static int getCptHumain() {
 		return cptHumain;
+	}
+	
+	public void reproduce() {
+		if (Math.random() <= pReprodHomme) {
+			terrain.addElement(new Homme(parent, terrain, theta, phi));
+		}
 	}
 }

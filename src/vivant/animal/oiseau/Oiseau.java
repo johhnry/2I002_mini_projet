@@ -11,7 +11,6 @@ public abstract class Oiseau extends Animal {
 	
 	public Oiseau(PApplet parent, Terrain terrain , String filename, int altitude) {
 		super(parent, terrain, filename);
-		this.r = terrain.getRayon()+altitude;
+		this.altitude = altitude;
 	}
-	
 }

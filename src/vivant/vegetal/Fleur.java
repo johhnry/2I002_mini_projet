@@ -5,6 +5,7 @@ import terrain.Terrain;
 
 public class Fleur extends Vegetal {
 	private static String filename = "fleur.obj";
+	private static double pReprodFleur = 0.008;
 
 	public Fleur(PApplet parent, Terrain terrain, double theta, double phi) {
 		super(parent, terrain, filename, theta, phi);
@@ -35,5 +36,11 @@ public class Fleur extends Vegetal {
 			return false;
 		}
 		return true;
+	}
+	
+	public void reproduce() {
+		if (Math.random() <= pReprodFleur) {
+			terrain.addElement(new Fleur(parent, terrain, theta+parent.random(-1,1), phi+parent.random(-1,1)));
+		}
 	}
 }

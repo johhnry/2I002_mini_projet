@@ -6,6 +6,7 @@ import terrain.Terrain;
 
 public class Elephant extends Mammifere {
 	private static final String filename = "elephant.obj";
+	private static double pReprodElephant = 0.0001;
 	
 	//duree de vie environ 60 ans
 	public Elephant(PApplet parent, Terrain terrain, double theta, double phi) {
@@ -31,10 +32,6 @@ public class Elephant extends Mammifere {
 	public void boire() {
 		this.terrain.getEau().reduireQt(3);
 	}
-
-	public void move() {
-		
-	}
 	
 	public boolean update() {
 		updateVivant();
@@ -43,5 +40,11 @@ public class Elephant extends Mammifere {
 			return false;
 		}
 		return true;
+	}
+	
+	public void reproduce() {
+		if (Math.random() <= pReprodElephant) {
+			terrain.addElement(new Elephant(parent, terrain, theta, phi));
+		}
 	}
 }

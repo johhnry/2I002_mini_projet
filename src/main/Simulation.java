@@ -15,25 +15,26 @@ public class Simulation extends PApplet{
 	private Options options;
 	private Soleil soleil;
 	
+	//Values slider
+	private int sSpeed = 1;
+	
 	public static void main(String[] args) {
 		PApplet.main("main.Simulation");
 	}
 
 	public void settings(){
-		//size(800,800,P3D);
-		
 		fullScreen(P3D);
 	}
 
 	public void setup(){
 		//Initialization
-		camera = new PeasyCam(this, width/2, height/2, 0, 400);
-		terrain = new Terrain(this,  width/2, height/2, 0, 100);
-		soleil = new Soleil(this, terrain, HALF_PI);
+		camera = new PeasyCam(this, width/2, height/2, 0, 600);
+		terrain = new Terrain(this,  width/2, height/2, 0, 200);
+		soleil = new Soleil(this, terrain, HALF_PI, 100);
 		cp5 = new ControlP5(this);
 		cp5.setAutoDraw(false);
-		cp5.setFont(createFont("font/uni0553-webfont.ttf", 12));
-		options = new Options(this, terrain, cp5, 100);
+		cp5.setFont(createFont("font/uni0553-webfont.ttf", 14));
+		options = new Options(this, terrain, cp5, 70);
 		
 		//Init
 		terrain.init();
@@ -54,13 +55,23 @@ public class Simulation extends PApplet{
 		
 		//GUI
 		camera.beginHUD();
-		options.update();
 		cp5.draw();
 		camera.endHUD();
 		
-		//Update du terrain
-		terrain.update();
-		soleil.update();
+		//Update
+		for(int i=0;i<sSpeed;i++) {
+			options.update();
+			terrain.update();
+			soleil.update();
+		}
+	}
+	
+	public void sSpeed(float s) {
+		this.sSpeed = (int) s;
+	}
+	
+	public void sunColor(int c) {
+		this.soleil.setRGB(red(c),green(c),blue(c));
 	}
 	
 	//Debug function

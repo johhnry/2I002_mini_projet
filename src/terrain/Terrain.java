@@ -2,28 +2,29 @@ package terrain;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import amenagement.Amenagement;
 import amenagement.Ville;
 import amenagement.domestique.Domestique;
 import amenagement.industriel.Industriel;
 import element.Element;
 import processing.core.PApplet;
 import processing.core.PConstants;
-import processing.core.PImage;
 import processing.core.PShape;
 import ressource.*;
-import vivant.animal.Animal;
+import vivant.Vivant;
+import vivant.animal.Deplacable;
 import vivant.animal.mammifere.Homme;
 import vivant.animal.mammifere.Mammifere;
+import vivant.animal.oiseau.Colibri;
 import vivant.animal.oiseau.Oiseau;
 import vivant.animal.reptile.Crocodile;
 import vivant.animal.reptile.Reptile;
-import vivant.vegetal.Fleur;
+import vivant.vegetal.Arbre;
 import vivant.vegetal.Vegetal;
 
 public class Terrain {
 	private PApplet parent;
 	private int posX, posY, posZ, rayon;
-	private PImage earthTexture;
 	private PShape earthShape;
 	private ArrayList<Element> listElements = new ArrayList<Element>();
 	
@@ -39,10 +40,9 @@ public class Terrain {
 		this.posY = posY;
 		this.posZ = posZ;
 		this.rayon = rayon;
-		this.earthTexture = parent.loadImage("texture/earthmap1k.jpg");
 		this.earthShape = parent.createShape(PConstants.SPHERE, this.rayon);
 		earthShape.setStroke(false);
-		this.earthShape.setTexture(this.earthTexture);
+		this.earthShape.setTexture(parent.loadImage("texture/earthmap1k.jpg"));
 	}
 	
 	public void display() {
@@ -72,24 +72,36 @@ public class Terrain {
 		
 		for(int i=listElements.size()-1;i>=0;i--) {
 			Element e = listElements.get(i);
-			if (e instanceof Animal) {
-				((Animal) e).move();
+			if (e instanceof Deplacable) {
+				((Deplacable) e).move();
 			}
-			if (!e.update()) listElements.remove(e);
+			if (!(e instanceof Amenagement && Homme.getCptHumain()<=0)) {
+				if (!e.update()) {
+					if (e instanceof Vivant) nourriture.augmenterQt(5);
+					listElements.remove(e);
+				}
+			}else {
+				
+			}
 		}
 	}
 	
 	public void init() {
-		for(int i=0;i<100;i++) {
-			addElement(new Homme(parent, this));
+		for(int i=0;i<50;i++) {
+			addElement(new Arbre(parent, this));
 			addElement(new Crocodile(parent, this));
-			addElement(new Fleur(parent, this));
+			addElement(new Nuage(parent, this));
+			addElement(new Homme(parent, this));
+			addElement(new Colibri(parent, this));
 		}
-		addElement(new Ville(parent, this));
 	}
 	
 	public int getRayon() {
 		return this.rayon;
+	}
+	
+	public void setRayon(float r) {
+		this.rayon = (int) r;
 	}
 	
 	public int getPosX() {

@@ -11,25 +11,26 @@ public class CentraleNucleaire extends Industriel {
 		super(parent, terrain, filename, theta, phi);
 	}
 
-	@Override
-	public void utiliser() {
-		terrain.getMineral().reduireQt(5);
-		terrain.getEau().reduireQt(0.5);
+	public CentraleNucleaire(PApplet parent, Terrain terrain) {
+		super(parent, terrain, filename);
 	}
 
-	@Override
+	public void utiliser() {
+		terrain.getMineral().reduireQt(10);
+		terrain.getEau().reduireQt(2);
+	}
+
 	public void rejeter() {
 		terrain.getMineral().reduireQual(0.003);
 		terrain.getEau().reduireQual(0.002);
 		terrain.getAir().reduireQual(0.001);
 	}
 
-	@Override
 	public boolean update() {
 		utiliser();
 		rejeter();
 		if (terrain.getMineral().getQuantite() <= 0) {
-			this.destroy(filename_destroy);
+			this.destroy();
 		}
 		return true;
 	}
