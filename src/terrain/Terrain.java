@@ -15,6 +15,7 @@ import vivant.Vivant;
 import vivant.animal.Deplacable;
 import vivant.animal.mammifere.Homme;
 import vivant.animal.mammifere.Mammifere;
+import vivant.animal.oiseau.Aigle;
 import vivant.animal.oiseau.Colibri;
 import vivant.animal.oiseau.Oiseau;
 import vivant.animal.reptile.Crocodile;
@@ -87,11 +88,8 @@ public class Terrain {
 	}
 	
 	public void init() {
-		for(int i=0;i<50;i++) {
+		for(int i=0;i<100;i++) {
 			addElement(new Arbre(parent, this));
-			addElement(new Crocodile(parent, this));
-			addElement(new Nuage(parent, this));
-			addElement(new Homme(parent, this));
 			addElement(new Colibri(parent, this));
 		}
 	}

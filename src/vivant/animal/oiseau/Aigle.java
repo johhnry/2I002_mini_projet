@@ -7,15 +7,16 @@ import terrain.Terrain;
 public class Aigle extends Oiseau {
 	private static final String filename = "aigle.obj";
 	private static double pReprodAigle = 0.0009;
+	private static int altAigle = 20;
 	
 	//duree de vie environ 30 ans
 	public Aigle(PApplet parent, Terrain terrain, double theta, double phi) {
-		super(parent, terrain, filename, theta, phi);
+		super(parent, terrain, filename, theta, phi, altAigle);
 		old = Math.random()/200 + 0.001;
 	}
 	
 	public Aigle(PApplet parent, Terrain terrain) {
-		super(parent, terrain, filename, 20);
+		super(parent, terrain, filename, altAigle);
 		old = Math.random()/200 + 0.001;
 	}
 
