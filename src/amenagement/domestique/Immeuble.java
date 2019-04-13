@@ -4,15 +4,16 @@ import processing.core.PApplet;
 import terrain.Terrain;
 
 public class Immeuble extends Domestique {
-	public static String filename = "immeuble.obj";
+	private static String filename = "immeuble.obj";
+	private static String filename_destroy = "immeuble_destroy.obj";
 
 	public Immeuble(PApplet parent, Terrain terrain, double theta, double phi) {
-		super(parent, terrain, filename, theta, phi);
+		super(parent, terrain, filename, filename_destroy, theta, phi);
 		this.capacite = (int) (Math.random()*20) + 1; 
 	}
 	
 	public Immeuble(PApplet parent, Terrain terrain) {
-		super(parent, terrain, filename);
+		super(parent, terrain, filename, filename_destroy);
 	}
 
 	@Override

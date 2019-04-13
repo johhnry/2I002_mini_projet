@@ -22,7 +22,7 @@ public class Crocodile extends Reptile {
 	public void respirer() {
 		Air air = this.terrain.getAir();
 		air.reduireQt(0.15);
-		air.reduireQual(0.002);
+		air.reduireQual(0.0001);
 	}
 
 	public void manger() {

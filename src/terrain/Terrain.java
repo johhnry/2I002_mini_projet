@@ -15,12 +15,8 @@ import vivant.Vivant;
 import vivant.animal.Deplacable;
 import vivant.animal.mammifere.Homme;
 import vivant.animal.mammifere.Mammifere;
-import vivant.animal.oiseau.Aigle;
-import vivant.animal.oiseau.Colibri;
 import vivant.animal.oiseau.Oiseau;
-import vivant.animal.reptile.Crocodile;
 import vivant.animal.reptile.Reptile;
-import vivant.vegetal.Arbre;
 import vivant.vegetal.Vegetal;
 
 public class Terrain {
@@ -82,16 +78,25 @@ public class Terrain {
 					listElements.remove(e);
 				}
 			}else {
-				
+				((Amenagement) e).destroy(); 
 			}
 		}
 	}
 	
 	public void init() {
-		for(int i=0;i<100;i++) {
-			addElement(new Arbre(parent, this));
-			addElement(new Colibri(parent, this));
+		eau.reset();
+		air.reset();
+		mineral.reset();
+		nourriture.reset();
+		
+		this.listElements.clear();
+		
+		//Ajouter
+		for(int i=0;i<30;i++) {
+			addElement(new Nuage(parent, this));
 		}
+		
+		addElement(new Ville(parent, this));
 	}
 	
 	public int getRayon() {

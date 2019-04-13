@@ -1,5 +1,6 @@
 package vivant.animal.mammifere;
 
+import amenagement.Ville;
 import amenagement.domestique.Cimetiere;
 import processing.core.PApplet;
 import ressource.Air;
@@ -12,7 +13,7 @@ public class Homme extends Mammifere {
 	
 	public Homme(PApplet parent, Terrain terrain, double theta, double phi) {
 		super(parent, terrain, filename, theta, phi);
-		old = Math.random()/100 + 0.001;
+		old = Math.random()/500 + 0.001;
 		cptHumain++;
 	}
 	
@@ -37,6 +38,7 @@ public class Homme extends Mammifere {
 	}
 	
 	public boolean update() {
+		if (Math.random() < 0.0005) terrain.addElement(new Ville(parent, terrain));
 		updateVivant();
 		if (!estVivant()) {
 			cptHumain--;

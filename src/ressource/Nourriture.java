@@ -15,4 +15,9 @@ public class Nourriture extends Ressource{
 	public static int getQtInitNourriture() {
 		return qtInitNourriture;
 	}
+	
+	public void reset() {
+		this.qualite = 1;
+		this.quantite = qtInitNourriture;
+	}
 }

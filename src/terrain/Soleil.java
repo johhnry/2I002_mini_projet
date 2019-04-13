@@ -10,7 +10,8 @@ public class Soleil {
 	private float angle = 0;
 	private float rotation;
 	private PShape sun;
-	private float r=225, g=251, b=216;
+	private static float initR=225, initG=251, initB=216;
+	private float r=initR, g=initG, b=initB;
 
 	public Soleil(PApplet parent, Terrain terrain, float rotation, int radius) {
 		this.parent = parent;
@@ -38,12 +39,17 @@ public class Soleil {
 	}
 
 	public void update() {
-		angle += 0.01;
+		angle += 0.005;
 	}
 
 	public void setRGB(float r, float g, float b) {
 		this.r = r;
 		this.g = g;
 		this.b = b;
+	}
+	
+	public void reset() {
+		setRGB(initR, initG, initB);
+		this.angle = 0;
 	}
 }

@@ -15,13 +15,13 @@ public class Ville extends Amenagement {
 	private final int id;
 	
 	public Ville(PApplet parent, Terrain terrain, double theta, double phi) {
-		super(parent, terrain, "", theta, phi);
+		super(parent, terrain, "", "", theta, phi);
 		this.addDomestique();
 		this.id = ++cptVille;
 	}
 	
 	public Ville(PApplet parent, Terrain terrain) {
-		super(parent, terrain, "");
+		super(parent, terrain, "", "");
 		this.addDomestique();
 		this.id = ++cptVille;
 	}
@@ -45,21 +45,14 @@ public class Ville extends Amenagement {
 		}
 	}
 
-	@Override
 	public void utiliser() {
-		// TODO Auto-generated method stub
-		
 	}
 
-	@Override
-	public void rejeter() {
-		// TODO Auto-generated method stub
-		
+	public void rejeter() {	
 	}
-
 	
 	public boolean update() {
-		if (Homme.getCptHumain() >= 0 && Math.random()< 0.05) {
+		if (Homme.getCptHumain() >= 0 && Math.random()< 0.05 && !destroy) {
 			//On construit
 			if (this.listDomestiques.size() < this.capacite) {
 				//On ajoute dans la ville
@@ -75,5 +68,14 @@ public class Ville extends Amenagement {
 			d.update();
 		}
 		return true;
+	}
+	
+	public void destroy() {
+		if (!destroy) {
+			for(Domestique a : this.listDomestiques) {
+				a.destroy();
+			}
+		}
+		super.destroy();
 	}
 }

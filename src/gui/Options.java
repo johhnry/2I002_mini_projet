@@ -34,7 +34,7 @@ public class Options {
 				.setBackgroundColor(colorBckgGr)
 				.setWidth(widthGr)
 				.setBackgroundHeight(700)
-				.setBarHeight(20);
+				.setBarHeight(30);
 
 		int gapC = 35;
 		int marginC = 10;
@@ -144,7 +144,7 @@ public class Options {
 
 		chartRecensement.getColor().setBackground(colorBckgC);
 
-
+		
 		//-----------------------SLIDERS------------------------------------------------------
 		int widthGrSlider = 400;
 		/*Group sliders = cp5.addGroup("sliders")
@@ -162,11 +162,11 @@ public class Options {
 		int heightSlider = 25;
 
 		Group environment = cp5.addGroup("environment")
-				.setPosition(marginSGr,gapSGr+20)
+				.setPosition(marginSGr,gapSGr)
 				.setBackgroundColor(colorBckgGr)
 				.setWidth(widthSgr)
 				.setBackgroundHeight(500)
-				.setBarHeight(20);
+				.setBarHeight(30);
 
 		cp5.addSlider("sSpeed")
 		.setPosition(marginSlider, gapSlider)
@@ -180,13 +180,58 @@ public class Options {
 		cp5.addColorWheel("sunColor")
 		.setPosition(marginSlider, gapSlider*2+heightSlider+10)
 		.setGroup(environment);
+		
+		cp5.addButton("reset")
+		.setPosition(marginSlider, gapSlider*3+heightSlider+230)
+		.setSize(widthSgr - 2*marginSlider, 50)
+		.setGroup(environment);
+		
+		Group ajouter = cp5.addGroup("ajouter")
+				.setPosition(marginSGr,gapSGr)
+				.setBackgroundColor(colorBckgGr)
+				.setWidth(widthSgr)
+				.setBackgroundHeight(150)
+				.setBarHeight(30);
+		
+		int buttonHalfSize = (widthSgr - 2*marginSlider)/2;
+		int heightButton = 30;
+		cp5.addButton("addHomme")
+		.setPosition(marginSlider, gapSlider)
+		.setSize(buttonHalfSize, heightButton)
+		.setGroup(ajouter);
+		
+		cp5.addButton("addCentrale")
+		.setPosition(marginSlider*2+buttonHalfSize, gapSlider)
+		.setSize(buttonHalfSize, heightButton)
+		.setGroup(ajouter);
+		
+		cp5.addButton("addRaffinerie")
+		.setPosition(marginSlider, gapSlider+heightButton+marginSlider)
+		.setSize(buttonHalfSize, heightButton)
+		.setGroup(ajouter);
+		
+		cp5.addButton("addIncinerateur")
+		.setPosition(marginSlider*2+buttonHalfSize, gapSlider+heightButton+marginSlider)
+		.setSize(buttonHalfSize, heightButton)
+		.setGroup(ajouter);
+		
+		cp5.addButton("addVegetal")
+		.setPosition(marginSlider, gapSlider+heightButton*2+marginSlider*2)
+		.setSize(buttonHalfSize, heightButton)
+		.setGroup(ajouter);
+		
+		cp5.addButton("addAnimal")
+		.setPosition(marginSlider*2+buttonHalfSize, gapSlider+heightButton*2+marginSlider*2)
+		.setSize(buttonHalfSize, heightButton)
+		.setGroup(ajouter);
 
 		cp5.addAccordion("Options")
 		.setPosition(parent.width-widthGrSlider-20,cursorY)
 		.setWidth(widthGrSlider)
 		.setBackgroundColor(colorBckgGr)
 		.addItem(environment)
-		//.setCollapseMode()
+		.addItem(ajouter)
+		.setCollapseMode(Accordion.SINGLE);
 		;
 	}
 

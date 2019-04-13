@@ -13,4 +13,9 @@ public class Eau extends Ressource {
 	public static int getqtInitEau() {
 		return qtInitEau;
 	}
+	
+	public void reset() {
+		this.qualite = 1;
+		this.quantite = qtInitEau;
+	}
 }

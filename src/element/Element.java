@@ -4,6 +4,7 @@ import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PShape;
 import terrain.Terrain;
+import main.Simulation;
 
 public abstract class Element {
 	protected PApplet parent;
@@ -63,10 +64,6 @@ public abstract class Element {
 	}
 	
 	public void loadModel(String filename) {
-		if (filename != "") {
-			this.model = parent.loadShape("models/"+filename);
-		}else {
-			this.model = null;
-		}
+		this.model = ((Simulation)parent).getModel(filename);
 	}
 }

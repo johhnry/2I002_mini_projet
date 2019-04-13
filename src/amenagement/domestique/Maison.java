@@ -5,9 +5,10 @@ import terrain.Terrain;
 
 public class Maison extends Domestique {
 	public static String filename = "maison.obj";
+	private static String filename_destroy = "maison_destroy.obj";
 
 	public Maison(PApplet parent, Terrain terrain, double theta, double phi) {
-		super(parent, terrain, filename, theta, phi);
+		super(parent, terrain, filename, filename_destroy, theta, phi);
 		this.capacite = (int) (Math.random()*5) + 1; 
 	}
 

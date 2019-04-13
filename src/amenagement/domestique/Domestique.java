@@ -7,11 +7,11 @@ import terrain.Terrain;
 public abstract class Domestique extends Amenagement {
 	protected int capacite;
 	
-	public Domestique(PApplet parent, Terrain terrain, String filename, double theta, double phi) {
-		super(parent, terrain, filename, theta, phi);
+	public Domestique(PApplet parent, Terrain terrain, String filename, String fd, double theta, double phi) {
+		super(parent, terrain, filename, fd, theta, phi);
 	}
 	
-	public Domestique(PApplet parent, Terrain terrain, String filename) {
-		super(parent, terrain, filename);
+	public Domestique(PApplet parent, Terrain terrain, String filename, String fd) {
+		super(parent, terrain, filename, fd);
 	}
 }

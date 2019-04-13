@@ -9,23 +9,16 @@ public class Cimetiere extends Domestique {
 	private final int id;
 	
 	public Cimetiere(PApplet parent, Terrain terrain, double theta, double phi) {
-		super(parent, terrain, filename, theta, phi);
+		super(parent, terrain, filename, "", theta, phi);
 		this.id = ++cptCimetiere;
 	}
 
-	@Override
 	public void utiliser() {
-		// TODO Auto-generated method stub
-		
 	}
 
-	@Override
 	public void rejeter() {
-		// TODO Auto-generated method stub
-		
 	}
 
-	@Override
 	public boolean update() {
 		return true;
 	}

@@ -1,0 +1,97 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{geometry}
+\geometry{left=3.5cm, right=3.5cm}
+\lstset{language=Java}
+
+\begin{document}
+\title{Compte rendu projet 2I002}
+\author{Isabelle Bernard,\\
+	Joseph Henry,\\
+   Sorbonne Université,\\
+   Paris,\\
+   France,\\
+   L2 informatique\\
+   \texttt{joseph.henry@ensci.com}\\
+   \texttt{songhui-isabelle@ensci.com}}
+\date{\today}
+\maketitle
+
+\vspace{5\baselineskip}
+\begin{abstract}
+Notre projet vise à réaliser une simulation simplifiée de la terre et des ressources dont elle est composée.
+\end{abstract}
+
+\newpage
+
+\part{Introduction}
+\paragraph{Notre projet est une simulation de l'écosystème terrestre. Cette simulation tente de simplifier et de structurer les éléments et les interactions de cet écosystème.}
+\paragraph{Le but de ce projet est de proposer une application graphique et ludique pour inviter les utilsateurs à expérimenter, construire et se rendre compte de l'impact de leurs actions.}
+
+\part{Execution du Main}
+\paragraph{La fonction main (\texttt{Simulation.java}) réalise les étapes suivantes : \break}
+\begin{enumerate}
+\item{Appel de la librairie Processing}
+\begin{lstlisting}
+PApplet.main("main.Simulation");
+\end{lstlisting}
+\item{Ouverture de la fenêtre graphique (utilisation de la librairie \texttt{OpenGL})}
+\begin{lstlisting}
+fullScreen(P3D);
+\end{lstlisting}
+\item{Initialisation du terrain, de l'interface graphique et la caméra (librairie \texttt{PeasyCam})}
+\begin{lstlisting}
+terrain = new Terrain(this,  width/2, height/2, 0, 180);
+cp5 = new ControlP5(this);
+...
+\end{lstlisting}
+\item{Chargement des modèles}
+\begin{lstlisting}
+try {
+	loadModels(models);
+}catch(NumberFormatException e){
+	System.out.println("Erreur de chargement du modele");
+}
+\end{lstlisting}
+\newpage
+\item{La fonction \texttt{void draw()} s'execute en boucle (environ 30 fois par seconde)}
+\item{On affiche et on met à jour les différents composants}
+\begin{lstlisting}
+soleil.display();
+terrain.display();
+cp5.draw();
+...
+options.update();
+terrain.update();
+soleil.update();
+\end{lstlisting}
+\end{enumerate}
+
+\part{Difficultés rencontrées}
+\begin{itemize}
+\item Grande arborescence de fichiers et de classes.
+\\$\rightarrow$ Diagramme UML
+\item Optimisation et chargement des fichiers 3d.
+\\$\rightarrow$ Utilisation d'un dictionnaire
+\item Question de l'échelle de la simulation (taille, quantités, plage de valeurs...).
+\\$\rightarrow$ Intuition
+\item Gestion de l'héritage et transmission des attributs et des méthodes sur plusieurs générations.
+\\$\rightarrow UML$
+\item Géométrie dans l'espace et rotations tridimensionnelles.
+\\$\rightarrow$ Tentative de résolution par des moyens mathématiques (via forum) mais le problème s'est résolu par une réorganisation du code
+\end{itemize}
+
+\part{Travaux futurs}
+\begin{itemize}
+\item Création de connexions entre des villes. (implique un défi géométrique).
+\item Ajout d'une ambience sonore 
+\item Sécuriser et factoriser d'avantage le code.
+\end{itemize}
+
+\end{document}

@@ -8,11 +8,11 @@ public class Raffinerie extends Industriel {
 	private static String filename_destroy = "raffinerie_destroy.obj";
 
 	public Raffinerie(PApplet parent, Terrain terrain, double theta, double phi) {
-		super(parent, terrain, filename, theta, phi);
+		super(parent, terrain, filename, filename_destroy, theta, phi);
 	}
 	
 	public Raffinerie(PApplet parent, Terrain terrain) {
-		super(parent, terrain, filename);
+		super(parent, terrain, filename, filename_destroy);
 	}
 
 	public void utiliser() {

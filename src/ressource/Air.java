@@ -14,4 +14,9 @@ public class Air extends Ressource {
 	public static int getqtInitAir() {
 		return qtInitAir;
 	}
+	
+	public void reset() {
+		this.qualite = 1;
+		this.quantite = qtInitAir;
+	}
 }

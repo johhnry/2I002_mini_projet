@@ -6,19 +6,21 @@ import terrain.Terrain;
 
 public abstract class Amenagement extends Element implements Consommer{
 	protected boolean destroy = false;
-	protected static String filename_destroy;
+	protected String fDestroy;
 	
-	public Amenagement(PApplet parent, Terrain terrain, String filename, double theta, double phi) {
+	public Amenagement(PApplet parent, Terrain terrain, String filename, String fd, double theta, double phi) {
 		super(parent, terrain, filename, theta, phi);
+		fDestroy = fd;
 	}
 	
-	public Amenagement(PApplet parent, Terrain terrain, String filename) {
+	public Amenagement(PApplet parent, Terrain terrain, String filename, String fd) {
 		super(parent, terrain, filename);
+		fDestroy = fd;
 	}
 	
 	public void destroy() {
 		if(!destroy) {
-			this.loadModel(filename_destroy);
+			this.loadModel(fDestroy);
 			destroy = true;
 		}
 	}

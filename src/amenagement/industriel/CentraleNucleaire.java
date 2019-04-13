@@ -8,15 +8,15 @@ public class CentraleNucleaire extends Industriel {
 	private static String filename_destroy = "centrale_destroy.obj";
 
 	public CentraleNucleaire(PApplet parent, Terrain terrain, double theta, double phi) {
-		super(parent, terrain, filename, theta, phi);
+		super(parent, terrain, filename, filename_destroy, theta, phi);
 	}
 
 	public CentraleNucleaire(PApplet parent, Terrain terrain) {
-		super(parent, terrain, filename);
+		super(parent, terrain, filename, filename_destroy);
 	}
 
 	public void utiliser() {
-		terrain.getMineral().reduireQt(10);
+		terrain.getMineral().reduireQt(2);
 		terrain.getEau().reduireQt(2);
 	}
 

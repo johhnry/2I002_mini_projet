@@ -15,4 +15,9 @@ public class Mineral extends Ressource {
 	public static int getqtInitMineral() {
 		return qtInitMineral;
 	}
+	
+	public void reset() {
+		this.qualite = 1;
+		this.quantite = qtInitMineral;
+	}
 }
