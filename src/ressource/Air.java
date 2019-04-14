@@ -7,10 +7,6 @@ public class Air extends Ressource {
 		super(qtInitAir, 1);
 	}
 	
-	public String toString() {
-		return "Air ("+super.toString()+")";
-	}
-	
 	public static int getqtInitAir() {
 		return qtInitAir;
 	}

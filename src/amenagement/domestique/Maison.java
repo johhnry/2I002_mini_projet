@@ -4,7 +4,7 @@ import processing.core.PApplet;
 import terrain.Terrain;
 
 public class Maison extends Domestique {
-	public static String filename = "maison.obj";
+	public static final String filename = "maison.obj";
 	private static String filename_destroy = "maison_destroy.obj";
 
 	public Maison(PApplet parent, Terrain terrain, double theta, double phi) {
@@ -13,7 +13,7 @@ public class Maison extends Domestique {
 	}
 
 	public void utiliser() {
-		terrain.getEau().reduireQt(this.capacite*0.1);
+		terrain.getEau().reduireQt(this.capacite*0.05);
 	}
 
 	public void rejeter() {

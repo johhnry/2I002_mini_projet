@@ -4,17 +4,18 @@ import processing.core.PApplet;
 import terrain.Terrain;
 
 public class Fleur extends Vegetal {
-	private static String filename = "fleur.obj";
+	private static final String filename = "fleur.obj";
 	private static double pReprodFleur = 0.008;
+	private static int oldFleur = 100;
 
 	public Fleur(PApplet parent, Terrain terrain, double theta, double phi) {
 		super(parent, terrain, filename, theta, phi);
-		old = Math.random()/100 + 0.001;
+		old = Math.random()/oldFleur + 0.001;
 	}
 	
 	public Fleur(PApplet parent, Terrain terrain) {
 		super(parent, terrain, filename);
-		old = Math.random()/100 + 0.001;
+		old = Math.random()/oldFleur + 0.001;
 	}
 
 	public void respirer() {
@@ -42,5 +43,21 @@ public class Fleur extends Vegetal {
 		if (Math.random() <= pReprodFleur) {
 			terrain.addElement(new Fleur(parent, terrain, theta+parent.random(-1,1), phi+parent.random(-1,1)));
 		}
+	}
+
+	public static double getpReprodFleur() {
+		return pReprodFleur;
+	}
+
+	public static void setpReprodFleur(double pReprodFleur) {
+		Fleur.pReprodFleur = pReprodFleur;
+	}
+
+	public static int getOldFleur() {
+		return oldFleur;
+	}
+
+	public static void setOldFleur(int oldFleur) {
+		Fleur.oldFleur = oldFleur;
 	}
 }

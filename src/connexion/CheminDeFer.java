@@ -9,21 +9,13 @@ public class CheminDeFer extends Connexion {
 		super(parent, terrain, filename, theta, phi);
 	}
 
-	@Override
 	public void utiliser() {
-		// TODO Auto-generated method stub
-		
 	}
 
-	@Override
 	public void rejeter() {
-		// TODO Auto-generated method stub
-		
 	}
 
-	@Override
 	public boolean update() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 }

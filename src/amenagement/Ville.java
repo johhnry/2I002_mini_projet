@@ -35,7 +35,7 @@ public class Ville extends Amenagement {
 	public void addDomestique() {
 		double newTheta = theta + (Math.random()*2-1)/10 *orbite;
 		double newPhi = phi + (Math.random()*2-1)/10 *orbite;
-		if (Math.random()< 0.5) {
+		if (Math.random()< 0.2) {
 			this.listDomestiques.add(new Immeuble(parent, terrain, newTheta, newPhi));
 			orbite += incr;
 			incr /= 2.5;
@@ -52,7 +52,7 @@ public class Ville extends Amenagement {
 	}
 	
 	public boolean update() {
-		if (Homme.getCptHumain() >= 0 && Math.random()< 0.05 && !destroy) {
+		if (Homme.getCptHumain() >= 0 && Math.random()< 0.03 && !destroy) {
 			//On construit
 			if (this.listDomestiques.size() < this.capacite) {
 				//On ajoute dans la ville

@@ -8,6 +8,14 @@ import ressource.Air;
 import ressource.Eau;
 import ressource.Mineral;
 import terrain.Terrain;
+import vivant.animal.mammifere.Elephant;
+import vivant.animal.mammifere.Homme;
+import vivant.animal.oiseau.Aigle;
+import vivant.animal.oiseau.Colibri;
+import vivant.animal.reptile.Crocodile;
+import vivant.animal.reptile.Serpent;
+import vivant.vegetal.Arbre;
+import vivant.vegetal.Fleur;
 
 public class Options {
 	private PApplet parent;
@@ -147,13 +155,6 @@ public class Options {
 		
 		//-----------------------SLIDERS------------------------------------------------------
 		int widthGrSlider = 400;
-		/*Group sliders = cp5.addGroup("sliders")
-				.setPosition(parent.width-widthGrSlider-20,cursorY)
-				.setBackgroundColor(colorBckgGr)
-				.setWidth(widthGrSlider)
-				.setBackgroundHeight(700)
-				.setBarHeight(20);*/
-
 		int gapSGr = 20;
 		int marginSGr = 10;
 		int widthSgr = widthGrSlider-marginSGr*2;
@@ -165,7 +166,7 @@ public class Options {
 				.setPosition(marginSGr,gapSGr)
 				.setBackgroundColor(colorBckgGr)
 				.setWidth(widthSgr)
-				.setBackgroundHeight(500)
+				.setBackgroundHeight(430)
 				.setBarHeight(30);
 
 		cp5.addSlider("sSpeed")
@@ -175,14 +176,28 @@ public class Options {
 		.setValue(1)
 		.setDecimalPrecision(0)
 		.setNumberOfTickMarks(10)
-		.setGroup(environment);
+		.setGroup(environment)
+		;
 
 		cp5.addColorWheel("sunColor")
 		.setPosition(marginSlider, gapSlider*2+heightSlider+10)
 		.setGroup(environment);
 		
+		cp5.addSlider("capacity")
+		.setPosition(marginSlider, gapSlider*3 + heightSlider+230)
+		.setSize(widthSgr - 10*marginSlider, 25)
+		.setRange(0,3000)
+		.setDecimalPrecision(0)
+		.addListener(new ControlListener() {
+			public void controlEvent(ControlEvent e) {
+				Terrain.setElementCapacity((int) e.getController().getValue());
+			}
+		})
+		.setGroup(environment)
+		.setValue(Terrain.getElementCapacity());
+		
 		cp5.addButton("reset")
-		.setPosition(marginSlider, gapSlider*3+heightSlider+230)
+		.setPosition(marginSlider, gapSlider*4+heightSlider*2+230)
 		.setSize(widthSgr - 2*marginSlider, 50)
 		.setGroup(environment);
 		
@@ -224,6 +239,231 @@ public class Options {
 		.setPosition(marginSlider*2+buttonHalfSize, gapSlider+heightButton*2+marginSlider*2)
 		.setSize(buttonHalfSize, heightButton)
 		.setGroup(ajouter);
+		
+		//-------------------------------------------------------------------------------------
+		
+		float maxRange = 0.05f;
+		ControlListener sliderListener = new ControlListener() {
+			public void controlEvent(ControlEvent e) {
+				float v = e.getController().getValue();
+				switch (e.getController().getName()) {
+				case "pHomme":
+					Homme.setpReprodHomme(v);
+					break;
+				case "pElephant":
+					Elephant.setpReprodElephant(v);
+					break;
+				case "pColibri":
+					Colibri.setpReprodColibri(v);
+					break;
+				case "pAigle":
+					Aigle.setpReprodAigle(v);
+					break;
+				case "pCrocodile":
+					Crocodile.setpReprodCrocodile(v);
+					break;
+				case "pSerpent":
+					Serpent.setpReprodSerpent(v);
+					break;
+				case "pArbre":
+					Arbre.setpReprodArbre(v);
+					break;
+				case "pFleur":
+					Fleur.setpReprodFleur(v);
+					break;
+				case "vHomme":
+					Homme.setOldHomme((int)v);;
+					break;
+				case "vElephant":
+					Elephant.setOldElephant((int)v);;
+					break;
+				case "vColibri":
+					Colibri.setOldColibri((int)v);;
+					break;
+				case "vAigle":
+					Aigle.setOldAigle((int)v);;
+					break;
+				case "vCrocodile":
+					Crocodile.setOldCrocodile((int)v);;
+					break;
+				case "vSerpent":
+					Serpent.setOldSerpent((int)v);;
+					break;
+				case "vArbre":
+					Arbre.setOldArbre((int)v);;
+					break;
+				case "vFleur":
+					Fleur.setOldFleur((int)v);
+					break;
+				default:
+					break;
+				}
+			}
+		};
+		
+		//REPRODUCTION ----------------------------------------------------------
+		
+		Group reproduction = cp5.addGroup("reproduction")
+				.setPosition(marginSGr,gapSGr)
+				.setBackgroundColor(colorBckgGr)
+				.setWidth(widthSgr)
+				.setBackgroundHeight(310)
+				.setBarHeight(30);
+		
+		cp5.addSlider("pHomme")
+		.setPosition(marginSlider, gapSlider)
+		.setSize(widthSgr - 10*marginSlider, heightSlider)
+		.setRange(0,maxRange)
+		.setDecimalPrecision(3)
+		.addListener(sliderListener)
+		.setGroup(reproduction)
+		.setValue((float)Homme.getpReprodHomme());
+		
+		cp5.addSlider("pElephant")
+		.setPosition(marginSlider, gapSlider+heightSlider+marginSlider)
+		.setSize(widthSgr - 10*marginSlider, heightSlider)
+		.setRange(0,maxRange)
+		.setDecimalPrecision(3)
+		.addListener(sliderListener)
+		.setGroup(reproduction)
+		.setValue((float)Elephant.getpReprodElephant());
+		
+		cp5.addSlider("pColibri")
+		.setPosition(marginSlider, gapSlider+(heightSlider+marginSlider)*2)
+		.setSize(widthSgr - 10*marginSlider, heightSlider)
+		.setRange(0,maxRange)
+		.setDecimalPrecision(3)
+		.addListener(sliderListener)
+		.setGroup(reproduction)
+		.setValue((float)Colibri.getpReprodColibri());
+		
+		cp5.addSlider("pAigle")
+		.setPosition(marginSlider, gapSlider+(heightSlider+marginSlider)*3)
+		.setSize(widthSgr - 10*marginSlider, heightSlider)
+		.setRange(0,maxRange)
+		.setDecimalPrecision(3)
+		.addListener(sliderListener)
+		.setGroup(reproduction)
+		.setValue((float)Aigle.getpReprodAigle());
+		
+		cp5.addSlider("pCrocodile")
+		.setPosition(marginSlider, gapSlider+(heightSlider+marginSlider)*4)
+		.setSize(widthSgr - 10*marginSlider, heightSlider)
+		.setRange(0,maxRange)
+		.setDecimalPrecision(3)
+		.addListener(sliderListener)
+		.setGroup(reproduction)
+		.setValue((float)Crocodile.getpReprodCrocodile());
+		
+		cp5.addSlider("pSerpent")
+		.setPosition(marginSlider, gapSlider+(heightSlider+marginSlider)*5)
+		.setSize(widthSgr - 10*marginSlider, heightSlider)
+		.setRange(0,maxRange)
+		.setDecimalPrecision(3)
+		.addListener(sliderListener)
+		.setGroup(reproduction)
+		.setValue((float)Serpent.getpReprodSerpent());
+		
+		cp5.addSlider("pArbre")
+		.setPosition(marginSlider, gapSlider+(heightSlider+marginSlider)*6)
+		.setSize(widthSgr - 10*marginSlider, heightSlider)
+		.setRange(0,maxRange)
+		.setDecimalPrecision(3)
+		.addListener(sliderListener)
+		.setGroup(reproduction)
+		.setValue((float)Arbre.getpReprodArbre());
+		
+		cp5.addSlider("pFleur")
+		.setPosition(marginSlider, gapSlider+(heightSlider+marginSlider)*7)
+		.setSize(widthSgr - 10*marginSlider, heightSlider)
+		.setRange(0,maxRange)
+		.setDecimalPrecision(3)
+		.addListener(sliderListener)
+		.setGroup(reproduction)
+		.setValue((float)Fleur.getpReprodFleur());
+		
+		//VIE------------------------------------------------------------------------
+		maxRange = 1000;
+		Group vie = cp5.addGroup("vie")
+				.setPosition(marginSGr,gapSGr)
+				.setBackgroundColor(colorBckgGr)
+				.setWidth(widthSgr)
+				.setBackgroundHeight(310)
+				.setBarHeight(30);
+		
+		cp5.addSlider("vHomme")
+		.setPosition(marginSlider, gapSlider)
+		.setSize(widthSgr - 10*marginSlider, heightSlider)
+		.setRange(1,maxRange)
+		.setDecimalPrecision(0)
+		.addListener(sliderListener)
+		.setGroup(vie)
+		.setValue((float)Homme.getOldHomme());
+		
+		cp5.addSlider("vElephant")
+		.setPosition(marginSlider, gapSlider+heightSlider+marginSlider)
+		.setSize(widthSgr - 10*marginSlider, heightSlider)
+		.setRange(1,maxRange)
+		.setDecimalPrecision(0)
+		.addListener(sliderListener)
+		.setGroup(vie)
+		.setValue((float)Elephant.getOldElephant());
+		
+		cp5.addSlider("vColibri")
+		.setPosition(marginSlider, gapSlider+(heightSlider+marginSlider)*2)
+		.setSize(widthSgr - 10*marginSlider, heightSlider)
+		.setRange(1,maxRange)
+		.setDecimalPrecision(0)
+		.addListener(sliderListener)
+		.setGroup(vie)
+		.setValue((float)Colibri.getOldColibri());
+		
+		cp5.addSlider("vAigle")
+		.setPosition(marginSlider, gapSlider+(heightSlider+marginSlider)*3)
+		.setSize(widthSgr - 10*marginSlider, heightSlider)
+		.setRange(1,maxRange)
+		.setDecimalPrecision(0)
+		.addListener(sliderListener)
+		.setGroup(vie)
+		.setValue((float)Aigle.getOldAigle());
+		
+		cp5.addSlider("vCrocodile")
+		.setPosition(marginSlider, gapSlider+(heightSlider+marginSlider)*4)
+		.setSize(widthSgr - 10*marginSlider, heightSlider)
+		.setRange(1,maxRange)
+		.setDecimalPrecision(0)
+		.addListener(sliderListener)
+		.setGroup(vie)
+		.setValue((float)Crocodile.getOldCrocodile());
+		
+		cp5.addSlider("vSerpent")
+		.setPosition(marginSlider, gapSlider+(heightSlider+marginSlider)*5)
+		.setSize(widthSgr - 10*marginSlider, heightSlider)
+		.setRange(1,maxRange)
+		.setDecimalPrecision(0)
+		.addListener(sliderListener)
+		.setGroup(vie)
+		.setValue((float)Serpent.getOldSerpent());
+		
+		cp5.addSlider("vArbre")
+		.setPosition(marginSlider, gapSlider+(heightSlider+marginSlider)*6)
+		.setSize(widthSgr - 10*marginSlider, heightSlider)
+		.setRange(1,maxRange)
+		.setDecimalPrecision(0)
+		.addListener(sliderListener)
+		.setGroup(vie)
+		.setValue((float)Arbre.getOldArbre());
+		
+		cp5.addSlider("vFleur")
+		.setPosition(marginSlider, gapSlider+(heightSlider+marginSlider)*7)
+		.setSize(widthSgr - 10*marginSlider, heightSlider)
+		.setRange(1,maxRange)
+		.setDecimalPrecision(0)
+		.addListener(sliderListener)
+		.setGroup(vie)
+		.setValue((float)Fleur.getOldFleur());
+		
+		//ACCORDION--------------------------------------------------------------------
 
 		cp5.addAccordion("Options")
 		.setPosition(parent.width-widthGrSlider-20,cursorY)
@@ -231,8 +471,9 @@ public class Options {
 		.setBackgroundColor(colorBckgGr)
 		.addItem(environment)
 		.addItem(ajouter)
-		.setCollapseMode(Accordion.SINGLE);
-		;
+		.addItem(reproduction)
+		.addItem(vie)
+		.setCollapseMode(Accordion.MULTIPLES);
 	}
 
 	public void update() {

@@ -7,16 +7,17 @@ import terrain.Terrain;
 public class Serpent extends Reptile {
 	private static final String filename = "serpent.obj";
 	private static double pReprodSerpent = 0.008;
+	private static int oldSerpent = 100;
 	
 	//duree de vie environ 15 ans
 	public Serpent(PApplet parent, Terrain terrain, double theta, double phi) {
 		super(parent, terrain, filename, theta, phi);
-		old = Math.random()/100 + 0.001;
+		old = Math.random()/oldSerpent + 0.001;
 	}
 	
 	public Serpent(PApplet parent, Terrain terrain) {
 		super(parent, terrain, filename);
-		old = Math.random()/100 + 0.001;
+		old = Math.random()/oldSerpent + 0.001;
 	}
 
 	public void respirer() {
@@ -46,5 +47,21 @@ public class Serpent extends Reptile {
 		if (Math.random() <= pReprodSerpent) {
 			terrain.addElement(new Serpent(parent, terrain, theta, phi));
 		}
+	}
+
+	public static double getpReprodSerpent() {
+		return pReprodSerpent;
+	}
+
+	public static void setpReprodSerpent(double pReprodSerpent) {
+		Serpent.pReprodSerpent = pReprodSerpent;
+	}
+
+	public static int getOldSerpent() {
+		return oldSerpent;
+	}
+
+	public static void setOldSerpent(int oldSerpent) {
+		Serpent.oldSerpent = oldSerpent;
 	}
 }

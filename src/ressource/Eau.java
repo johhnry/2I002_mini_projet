@@ -6,10 +6,6 @@ public class Eau extends Ressource {
 		super(qtInitEau, 1);
 	}
 	
-	public String toString() {
-		return "Eau ("+super.toString()+")";
-	}
-	
 	public static int getqtInitEau() {
 		return qtInitEau;
 	}

@@ -57,7 +57,7 @@ public class Simulation extends PApplet{
 		}catch(NumberFormatException e) {
 			System.out.println("Erreur chargement modèle.");
 		}
-
+		
 		//Init
 		terrain.init();
 		options.init();
@@ -75,9 +75,17 @@ public class Simulation extends PApplet{
 		soleil.display();
 		terrain.display();
 
-		//GUI
+		//On desactive la caméra
 		camera.beginHUD();
+		//GUI
 		cp5.draw();
+		//Informations
+		if (terrain.isListElementFull()) {
+			fill(255,0,0);
+		}else {
+			fill(255);
+		}
+		text("Nombre d'éléments : "+terrain.getCountElement(), width-200,20);
 		camera.endHUD();
 
 		//Update

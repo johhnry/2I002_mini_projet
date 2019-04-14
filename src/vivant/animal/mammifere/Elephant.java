@@ -7,16 +7,17 @@ import terrain.Terrain;
 public class Elephant extends Mammifere {
 	private static final String filename = "elephant.obj";
 	private static double pReprodElephant = 0.001;
-	
+	private static int oldElephant = 500;
+
 	//duree de vie environ 60 ans
 	public Elephant(PApplet parent, Terrain terrain, double theta, double phi) {
 		super(parent, terrain, filename, theta, phi);
-		old = Math.random()/100 + 0.001;
+		old = Math.random()/oldElephant + 0.001;
 	}
 	
 	public Elephant(PApplet parent, Terrain terrain) {
 		super(parent, terrain, filename);
-		old = Math.random()/100 + 0.001;
+		old = Math.random()/oldElephant + 0.001;
 	}
 
 	public void respirer() {
@@ -46,5 +47,21 @@ public class Elephant extends Mammifere {
 		if (Math.random() <= pReprodElephant) {
 			terrain.addElement(new Elephant(parent, terrain, theta, phi));
 		}
+	}
+	
+	public static double getpReprodElephant() {
+		return pReprodElephant;
+	}
+
+	public static void setpReprodElephant(double pReprodElephant) {
+		Elephant.pReprodElephant = pReprodElephant;
+	}
+
+	public static int getOldElephant() {
+		return oldElephant;
+	}
+
+	public static void setOldElephant(int oldElephant) {
+		Elephant.oldElephant = oldElephant;
 	}
 }

@@ -7,11 +7,6 @@ public class Nourriture extends Ressource{
 		super(qtInitNourriture, 1);
 	}
 	
-	
-	public String toString() {
-		return "Nourriture ("+super.toString()+")";
-	}
-	
 	public static int getQtInitNourriture() {
 		return qtInitNourriture;
 	}

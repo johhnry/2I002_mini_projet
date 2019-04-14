@@ -4,8 +4,8 @@ import processing.core.PApplet;
 import terrain.Terrain;
 
 public class Raffinerie extends Industriel {
-	private static String filename = "raffinerie.obj";
-	private static String filename_destroy = "raffinerie_destroy.obj";
+	private static final String filename = "raffinerie.obj";
+	private static final String filename_destroy = "raffinerie_destroy.obj";
 
 	public Raffinerie(PApplet parent, Terrain terrain, double theta, double phi) {
 		super(parent, terrain, filename, filename_destroy, theta, phi);

@@ -33,9 +33,5 @@ public abstract class Ressource {
 		return qualite;
 	}
 	
-	public String toString() {
-		return "qt : "+quantite+" / ql : "+qualite;
-	}
-	
 	public abstract void reset();
 }

@@ -17,6 +17,8 @@ import vivant.animal.mammifere.Homme;
 import vivant.animal.mammifere.Mammifere;
 import vivant.animal.oiseau.Oiseau;
 import vivant.animal.reptile.Reptile;
+import vivant.vegetal.Arbre;
+import vivant.vegetal.Fleur;
 import vivant.vegetal.Vegetal;
 
 public class Terrain {
@@ -24,6 +26,7 @@ public class Terrain {
 	private int posX, posY, posZ, rayon;
 	private PShape earthShape;
 	private ArrayList<Element> listElements = new ArrayList<Element>();
+	private static int elementCapacity = 500;
 	
 	//Ressources
 	private Eau eau = new Eau();
@@ -91,12 +94,19 @@ public class Terrain {
 		
 		this.listElements.clear();
 		
-		//Ajouter
+		//Ajout des nuages
 		for(int i=0;i<30;i++) {
 			addElement(new Nuage(parent, this));
 		}
 		
-		addElement(new Ville(parent, this));
+		//Ajout des végétaux
+		for(int i=0;i<80;i++) {
+			if(Math.random() < 0.3) {
+				addElement(new Arbre(parent, this));
+			}else {
+				addElement(new Fleur(parent, this));
+			}
+		}
 	}
 	
 	public int getRayon() {
@@ -167,5 +177,28 @@ public class Terrain {
 		hash.put("reptile", cRept);
 		hash.put("vegetal", cVege);
 		return hash;
+	}
+	
+	public boolean isListElementFull() {
+		if (listElements.size() > Terrain.elementCapacity) {
+			//Tant qu'il y a plus d'éléments
+			while(listElements.size() >= Terrain.elementCapacity) {
+				this.listElements.remove(listElements.size()-1);
+			}	
+			return true;
+		}
+		return false;
+	}
+	
+	public int getCountElement() {
+		return this.listElements.size();
+	}
+
+	public static int getElementCapacity() {
+		return elementCapacity;
+	}
+
+	public static void setElementCapacity(int elementCapacity) {
+		Terrain.elementCapacity = elementCapacity;
 	}
 }

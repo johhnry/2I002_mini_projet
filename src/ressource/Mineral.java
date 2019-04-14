@@ -8,10 +8,6 @@ public class Mineral extends Ressource {
 		super(qtInitMineral, 1);
 	}
 	
-	public String toString() {
-		return "Mineral ("+super.toString()+")";
-	}
-	
 	public static int getqtInitMineral() {
 		return qtInitMineral;
 	}

@@ -7,16 +7,17 @@ import terrain.Terrain;
 public class Crocodile extends Reptile {
 	private static final String filename = "crocodile.obj";
 	private static double pReprodCrocodile = 0.0007;
+	private static int oldCrocodile = 300;
 	
 	//duree de vie environ 20 ans
 	public Crocodile(PApplet parent, Terrain terrain, double theta, double phi) {
 		super(parent, terrain, filename, theta, phi);
-		old = Math.random()/300 + 0.001;
+		old = Math.random()/oldCrocodile + 0.001;
 	}
 	
 	public Crocodile(PApplet parent, Terrain terrain) {
 		super(parent, terrain, filename);
-		old = Math.random()/300 + 0.001;
+		old = Math.random()/oldCrocodile + 0.001;
 	}
 
 	public void respirer() {
@@ -46,5 +47,21 @@ public class Crocodile extends Reptile {
 		if (Math.random() <= pReprodCrocodile) {
 			terrain.addElement(new Crocodile(parent, terrain, theta, phi));
 		}
+	}
+
+	public static double getpReprodCrocodile() {
+		return pReprodCrocodile;
+	}
+
+	public static void setpReprodCrocodile(double pReprodCrocodile) {
+		Crocodile.pReprodCrocodile = pReprodCrocodile;
+	}
+	
+	public static int getOldCrocodile() {
+		return oldCrocodile;
+	}
+
+	public static void setOldCrocodile(int oldCrocodile) {
+		Crocodile.oldCrocodile = oldCrocodile;
 	}
 }

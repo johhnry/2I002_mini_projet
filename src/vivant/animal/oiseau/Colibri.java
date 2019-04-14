@@ -6,17 +6,18 @@ import terrain.Terrain;
 
 public class Colibri extends Oiseau {
 	private static final String filename = "colibri.obj";
-	private static double pReprodColibri = 0.006;
+	private static float pReprodColibri = 0.006f;
+	private static int oldColibri = 70;
 	private static int altColibri = 20;
 
 	public Colibri(PApplet parent, Terrain terrain, double theta, double phi) {
 		super(parent, terrain, filename, theta, phi, altColibri);
-		old = Math.random()/70 + 0.001;
+		old = Math.random()/oldColibri + 0.001;
 	}
 	
 	public Colibri(PApplet parent, Terrain terrain) {
 		super(parent, terrain, filename, altColibri);
-		old = Math.random()/70 + 0.001;
+		old = Math.random()/oldColibri + 0.001;
 	}
 
 	public void respirer() {
@@ -46,5 +47,21 @@ public class Colibri extends Oiseau {
 		if (Math.random() <= pReprodColibri) {
 			terrain.addElement(new Colibri(parent, terrain, theta, phi));
 		}
+	}
+	
+	public static double getpReprodColibri() {
+		return pReprodColibri;
+	}
+
+	public static void setpReprodColibri(float pReprodColibri) {
+		Colibri.pReprodColibri = pReprodColibri;
+	}
+
+	public static int getOldColibri() {
+		return oldColibri;
+	}
+
+	public static void setOldColibri(int oldColibri) {
+		Colibri.oldColibri = oldColibri;
 	}
 }

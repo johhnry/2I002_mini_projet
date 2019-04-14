@@ -4,8 +4,8 @@ import processing.core.PApplet;
 import terrain.Terrain;
 
 public class CentraleNucleaire extends Industriel {
-	private static String filename = "centrale.obj";
-	private static String filename_destroy = "centrale_destroy.obj";
+	private static final String filename = "centrale.obj";
+	private static final String filename_destroy = "centrale_destroy.obj";
 
 	public CentraleNucleaire(PApplet parent, Terrain terrain, double theta, double phi) {
 		super(parent, terrain, filename, filename_destroy, theta, phi);
