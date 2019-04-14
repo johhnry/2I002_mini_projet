@@ -3,11 +3,15 @@
 \usepackage[french]{babel}
 \usepackage[T1]{fontenc}
 \usepackage{amsmath}
+\usepackage{time}
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{listings}
 \usepackage{geometry}
-\geometry{left=3.5cm, right=3.5cm}
+\usepackage{fancyvrb}
+\usepackage{fvextra}
+
+\geometry{left=3cm, right=3cm}
 \lstset{language=Java}
 
 \begin{document}
@@ -25,17 +29,17 @@
 
 \vspace{5\baselineskip}
 \begin{abstract}
-Notre projet vise à réaliser une simulation simplifiée de la terre et des ressources dont elle est composée.
+Notre projet vise à réaliser une simulation simplifiée de la Terre et des ressources dont elle est composée.
 \end{abstract}
 
 \newpage
 
 \part{Introduction}
-\paragraph{Notre projet est une simulation de l'écosystème terrestre. Cette simulation tente de simplifier et de structurer les éléments et les interactions de cet écosystème.}
-\paragraph{Le but de ce projet est de proposer une application graphique et ludique pour inviter les utilsateurs à expérimenter, construire et se rendre compte de l'impact de leurs actions.}
+Notre projet est une simulation de l'écosystème terrestre. Cette simulation tente de simplifier et de structurer les éléments et les interactions de cet écosystème.
+Le but de ce projet est de proposer une application graphique et ludique pour inviter les utilsateurs à expérimenter, construire et se rendre compte de l'impact de leurs actions.
 
 \part{Execution du Main}
-\paragraph{La fonction main (\texttt{Simulation.java}) réalise les étapes suivantes : \break}
+La fonction main (\texttt{Simulation.java}) réalise les étapes suivantes : \break
 \begin{enumerate}
 \item{Appel de la librairie Processing}
 \begin{lstlisting}
@@ -45,7 +49,7 @@ PApplet.main("main.Simulation");
 \begin{lstlisting}
 fullScreen(P3D);
 \end{lstlisting}
-\item{Initialisation du terrain, de l'interface graphique et la caméra (librairie \texttt{PeasyCam})}
+\item{Initialisation du terrain, de l'interface graphique et de la caméra (librairie \texttt{PeasyCam})}
 \begin{lstlisting}
 terrain = new Terrain(this,  width/2, height/2, 0, 180);
 cp5 = new ControlP5(this);
@@ -92,6 +96,212 @@ soleil.update();
 \item Création de connexions entre des villes. (implique un défi géométrique).
 \item Ajout d'une ambience sonore 
 \item Sécuriser et factoriser d'avantage le code.
+\end{itemize}
+
+\newpage
+
+\part*{Annexe}
+(Uniquement dans le dossier \texttt{./src})
+\begin{itemize}
+\vspace{1\baselineskip}
+\item{Nombre de fichiers : \texttt{45}}
+\item{Nombre de dossiers : \texttt{17}}
+\item{Nombre de lignes : \texttt{2307}}
+\item{Nombre de classes normales : \texttt{35}}
+\begin{Verbatim}[xleftmargin=.3in]
+public class Route
+public class CheminDeFer
+public class LigneAerienne
+public class Maison
+public class Immeuble
+public class Cimetiere
+public class Incinerateur
+public class CentraleNucleaire
+public class Raffinerie
+public class Ville
+public class Simulation
+public class Fleur
+public class Arbre
+public class Serpent
+public class Crocodile
+public class Aigle
+public class Colibri
+public class Elephant
+public class Homme
+public class Mineral
+public class Air
+public class Eau
+public class Nourriture
+public class Options
+public class Terrain
+public class Nuage
+public class Soleil
+\end{Verbatim}
+
+\item{Nombre de classes abstraites : \texttt{12}}
+\begin{Verbatim}[xleftmargin=.3in]
+public abstract class Connexion
+public abstract class Domestique
+public abstract class Amenagement
+public abstract class Industriel
+public abstract class Vivant
+public abstract class Vegetal
+public abstract class Reptile
+public abstract class Animal
+public abstract class Oiseau
+public abstract class Mammifere
+public abstract class Ressource
+public abstract class Element
+\end{Verbatim}
+\item{Nombre d'interfaces : \texttt{5}}
+\begin{Verbatim}[xleftmargin=.3in]
+public interface Consommer
+public interface Respirer
+public interface Reproductible
+public interface Deplacable
+public interface Sustenter
+\end{Verbatim}
+\item{Liste des classes étendants Exception ou RunTimeException : \texttt{0}}
+
+\item{Nombre et localisation des tableaux : \texttt{0}}
+
+\item{Nombre et localisation des \texttt{ArrayList} : \texttt{5}}
+\begin{Verbatim}[xleftmargin=.3in, breaklines=true, breakanywhere=true]
+src/connexion/Connexion.java:7:	//private ArrayList<Amenagement> listeVilles;
+src/amenagement/Ville.java:3:import java.util.ArrayList;
+src/amenagement/Ville.java:10:	private ArrayList<Domestique> listDomestiques = new ArrayList<Domestique>();
+src/terrain/Terrain.java:3:import java.util.ArrayList;
+src/terrain/Terrain.java:28:	private ArrayList<Element> listElements = new ArrayList<Element>();
+\end{Verbatim}
+
+\item{Nombre et localisation des \texttt{static} : \texttt{92}}
+\begin{Verbatim}[xleftmargin=.3in, breaklines=true, breakanywhere=true]
+src/amenagement/domestique/Maison.java:7:static final String
+src/amenagement/domestique/Immeuble.java:7:static final String
+src/amenagement/domestique/Cimetiere.java:7:static final String
+src/amenagement/domestique/Cimetiere.java:8:static int cptCimetiere
+src/amenagement/industriel/Incinerateur.java:7:static final String
+src/amenagement/industriel/Incinerateur.java:8:static final String
+src/amenagement/industriel/CentraleNucleaire.java:7:static final String
+src/amenagement/industriel/CentraleNucleaire.java:8:static final String
+src/amenagement/industriel/Raffinerie.java:7:static final String
+src/amenagement/industriel/Raffinerie.java:8:static final String
+src/amenagement/Ville.java:14:static int cptVille
+src/main/Simulation.java:36:static void main
+src/vivant/Vivant.java:9:static double pSustenter
+src/vivant/Vivant.java:10:static double pBoire
+src/vivant/vegetal/Fleur.java:7:static final String
+src/vivant/vegetal/Fleur.java:8:static double pReprodFleur
+src/vivant/vegetal/Fleur.java:9:static int oldFleur
+src/vivant/vegetal/Fleur.java:48:static double getpReprodFleur
+src/vivant/vegetal/Fleur.java:52:static void setpReprodFleur
+src/vivant/vegetal/Fleur.java:56:static int getOldFleur
+src/vivant/vegetal/Fleur.java:60:static void setOldFleur
+src/vivant/vegetal/Arbre.java:7:static final String
+src/vivant/vegetal/Arbre.java:8:static double pReprodArbre
+src/vivant/vegetal/Arbre.java:9:static int oldArbre
+src/vivant/vegetal/Arbre.java:48:static double getpReprodArbre
+src/vivant/vegetal/Arbre.java:52:static void setpReprodArbre
+src/vivant/vegetal/Arbre.java:56:static int getOldArbre
+src/vivant/vegetal/Arbre.java:60:static void setOldArbre
+src/vivant/animal/reptile/Serpent.java:8:static final String
+src/vivant/animal/reptile/Serpent.java:9:static double pReprodSerpent
+src/vivant/animal/reptile/Serpent.java:10:static int oldSerpent
+src/vivant/animal/reptile/Serpent.java:52:static double getpReprodSerpent
+src/vivant/animal/reptile/Serpent.java:56:static void setpReprodSerpent
+src/vivant/animal/reptile/Serpent.java:60:static int getOldSerpent
+src/vivant/animal/reptile/Serpent.java:64:static void setOldSerpent
+src/vivant/animal/reptile/Crocodile.java:8:static final String
+src/vivant/animal/reptile/Crocodile.java:9:static double pReprodCrocodile
+src/vivant/animal/reptile/Crocodile.java:10:static int oldCrocodile
+src/vivant/animal/reptile/Crocodile.java:52:static double getpReprodCrocodile
+src/vivant/animal/reptile/Crocodile.java:56:static void setpReprodCrocodile
+src/vivant/animal/reptile/Crocodile.java:60:static int getOldCrocodile
+src/vivant/animal/reptile/Crocodile.java:64:static void setOldCrocodile
+src/vivant/animal/Animal.java:8:static float rangeMove
+src/vivant/animal/oiseau/Aigle.java:8:static final String
+src/vivant/animal/oiseau/Aigle.java:9:static double pReprodAigle
+src/vivant/animal/oiseau/Aigle.java:10:static int oldAigle
+src/vivant/animal/oiseau/Aigle.java:11:static int altAigle
+src/vivant/animal/oiseau/Aigle.java:53:static double getpReprodAigle
+src/vivant/animal/oiseau/Aigle.java:57:static void setpReprodAigle
+src/vivant/animal/oiseau/Aigle.java:61:static int getOldAigle
+src/vivant/animal/oiseau/Aigle.java:65:static void setOldAigle
+src/vivant/animal/oiseau/Colibri.java:8:static final String
+src/vivant/animal/oiseau/Colibri.java:9:static float pReprodColibri
+src/vivant/animal/oiseau/Colibri.java:10:static int oldColibri
+src/vivant/animal/oiseau/Colibri.java:11:static int altColibri
+src/vivant/animal/oiseau/Colibri.java:52:static double getpReprodColibri
+src/vivant/animal/oiseau/Colibri.java:56:static void setpReprodColibri
+src/vivant/animal/oiseau/Colibri.java:60:static int getOldColibri
+src/vivant/animal/oiseau/Colibri.java:64:static void setOldColibri
+src/vivant/animal/mammifere/Elephant.java:8:static final String
+src/vivant/animal/mammifere/Elephant.java:9:static double pReprodElephant
+src/vivant/animal/mammifere/Elephant.java:10:static int oldElephant
+src/vivant/animal/mammifere/Elephant.java:52:static double getpReprodElephant
+src/vivant/animal/mammifere/Elephant.java:56:static void setpReprodElephant
+src/vivant/animal/mammifere/Elephant.java:60:static int getOldElephant
+src/vivant/animal/mammifere/Elephant.java:64:static void setOldElephant
+src/vivant/animal/mammifere/Homme.java:10:static final String
+src/vivant/animal/mammifere/Homme.java:11:static int cptHumain
+src/vivant/animal/mammifere/Homme.java:12:static double pReprodHomme
+src/vivant/animal/mammifere/Homme.java:13:static int oldHomme
+src/vivant/animal/mammifere/Homme.java:53:static int getCptHumain
+src/vivant/animal/mammifere/Homme.java:63:static double getpReprodHomme
+src/vivant/animal/mammifere/Homme.java:67:static void setpReprodHomme
+src/vivant/animal/mammifere/Homme.java:71:static int getOldHomme
+src/vivant/animal/mammifere/Homme.java:75:static void setOldHomme
+src/vivant/animal/mammifere/Mammifere.java:8:static int cptMammifere
+src/vivant/animal/mammifere/Mammifere.java:19:static int getCptMammifere
+src/ressource/Mineral.java:5:static int qtInitMineral
+src/ressource/Mineral.java:11:static int getqtInitMineral
+src/ressource/Air.java:4:static int qtInitAir
+src/ressource/Air.java:10:static int getqtInitAir
+src/ressource/Eau.java:4:static int qtInitEau
+src/ressource/Eau.java:9:static int getqtInitEau
+src/ressource/Nourriture.java:4:static int qtInitNourriture
+src/ressource/Nourriture.java:10:static int getQtInitNourriture
+src/terrain/Terrain.java:29:static int elementCapacity
+src/terrain/Terrain.java:197:static int getElementCapacity
+src/terrain/Terrain.java:201:static void setElementCapacity
+src/terrain/Nuage.java:8:static float rangeMove
+src/terrain/Nuage.java:11:static int altNuage
+src/terrain/Nuage.java:15:static int rainingDensity
+src/terrain/Soleil.java:13:static float initR
+\end{Verbatim}
+
+\item{Nombre et localisation des \texttt{final} : \texttt{19}}
+\begin{Verbatim}[xleftmargin=.3in, breaklines=true, breakanywhere=true]
+src/amenagement/domestique/Maison.java:7:final String filename
+src/amenagement/domestique/Immeuble.java:7:final String filename
+src/amenagement/domestique/Cimetiere.java:7:final String filename
+src/amenagement/domestique/Cimetiere.java:9:final int id
+src/amenagement/industriel/Incinerateur.java:7:final String filename
+src/amenagement/industriel/Incinerateur.java:8:final String filename
+src/amenagement/industriel/CentraleNucleaire.java:7:final String filename
+src/amenagement/industriel/CentraleNucleaire.java:8:final String filename
+src/amenagement/industriel/Raffinerie.java:7:final String filename
+src/amenagement/industriel/Raffinerie.java:8:final String filename
+src/amenagement/Ville.java:15:final int id
+src/vivant/vegetal/Fleur.java:7:final String filename
+src/vivant/vegetal/Arbre.java:7:final String filename
+src/vivant/animal/reptile/Serpent.java:8:final String filename
+src/vivant/animal/reptile/Crocodile.java:8:final String filename
+src/vivant/animal/oiseau/Aigle.java:8:final String filename
+src/vivant/animal/oiseau/Colibri.java:8:final String filename
+src/vivant/animal/mammifere/Elephant.java:8:final String filename
+src/vivant/animal/mammifere/Homme.java:10:final String filename
+\end{Verbatim}
+
+\item{Nombre et localisation des exceptions déclanchées : \texttt{1}}
+\begin{Verbatim}[xleftmargin=.3in, breaklines=true, breakanywhere=true]
+src/main/Simulation.java:55:
+try {
+	loadModels(models);
+}catch(NumberFormatException e) {
+	System.out.println("Erreur chargement modèle.");
+}
+\end{Verbatim}
 \end{itemize}
 
 \end{document}
