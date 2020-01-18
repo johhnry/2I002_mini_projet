@@ -20,29 +20,38 @@ import amenagement.industriel.Incinerateur;
 import amenagement.industriel.Raffinerie;
 import controlP5.*;
 
+/*
+ * Base class for calling the Processing API
+ * and handling frame by frame simulation
+ */
 public class Simulation extends PApplet{
 	private PeasyCam camera;
 	private Terrain terrain;
-	private ControlP5 cp5;
+	private ControlP5 cp5;		
 	private Options options;
 	private Soleil soleil;
 
-	//Models
+	//Hash storing OBJ models as PShape
 	HashMap<String, PShape> models = new HashMap<String, PShape>();;
 
-	//Values slider
+	//Simulation speed handled by a slider
 	private int sSpeed = 1;
-
+	
+	//Main function calling PApplet on this class
 	public static void main(String[] args) {
 		PApplet.main("main.Simulation");
 	}
-
+	
+	//Use P3D(OpenGL) as render engine
 	public void settings(){
 		fullScreen(P3D);
 	}
-
+	
+	/*
+	 * The setup function initialize scene variables and load resources
+	 */
 	public void setup(){
-		//Initialization
+		//Instance scene variables
 		camera = new PeasyCam(this, width/2, height/2, 0, 600);
 		terrain = new Terrain(this,  width/2, height/2, 0, 180);
 		soleil = new Soleil(this, terrain, HALF_PI, 100);
@@ -51,83 +60,100 @@ public class Simulation extends PApplet{
 		cp5.setFont(createFont("font/uni0553-webfont.ttf", 14));
 		options = new Options(this, terrain, cp5, 70);
 
-		//Chargement des modèles
+		//Loading OBJ models
 		try {
 			loadModels(models);
 		}catch(NumberFormatException e) {
-			System.out.println("Erreur chargement modèle.");
+			System.out.println("Error while loading .obj files.");
 		}
 		
-		//Init
+		//Initialize terrain and UI
 		terrain.init();
 		options.init();
-
-		//Settings display
-		textMode(SHAPE);
 	}
-
+	
+	/*
+	 * The draw function is being executed ~30 times /s
+	 * This is where we call the display functions for every elements
+	 */
 	public void draw(){
-		//Display setup and lights
+		//Use lights and black background
 		lights();
 		background(0);
 
-		//Afficher le terrain
+		//Display sun and planet
 		soleil.display();
 		terrain.display();
 
-		//On desactive la caméra
+		//We disable the HUD in order to draw the UI
 		camera.beginHUD();
-		//GUI
+		
 		cp5.draw();
-		//Informations
+		
+		//Going red if there's too much objects
 		if (terrain.isListElementFull()) {
 			fill(255,0,0);
 		}else {
 			fill(255);
 		}
+		
+		//Displaying the number of objects in the scene
 		text("Nombre d'éléments : "+terrain.getCountElement(), width-200,20);
 		camera.endHUD();
 
-		//Update
+		//Update sun, planet and UI according to the simulation speed
 		for(int i=0;i<sSpeed;i++) {
 			options.update();
 			terrain.update();
 			soleil.update();
 		}
 	}
-
+	
+	/* -------------------------------------------------------------------------
+	 * UI FUNCTIONS
+	 * They are called whenever a parameter in the UI is changed
+	 */
+	
+	//Setter for simulation speed
 	public void sSpeed(float s) {
 		this.sSpeed = (int) s;
 	}
-
+	
+	//Setter for sunColor
 	public void sunColor(int c) {
 		this.soleil.setRGB(red(c),green(c),blue(c));
 	}
-
+	
+	//Reset function
 	public void reset() {
 		this.terrain.init();
 		camera.reset();
 		soleil.reset();
 	}
-
+	
+	//Add a human
 	public void addHomme() {
 		for(int i=0;i<10;i++) {
 			terrain.addElement(new Homme(this, terrain));
 		}
 	}
-
+	
+	//Add a nuclear plant
 	public void addCentrale() {
 		terrain.addElement(new CentraleNucleaire(this, terrain));
 	}
-
+	
+	//Add an incinerator
 	public void addIncinerateur() {
 		terrain.addElement(new Incinerateur(this, terrain));
 	}
-
+	
+	//Add an oil refinery
 	public void addRaffinerie() {
 		terrain.addElement(new Raffinerie(this, terrain));
 	}
-
+	
+	//Add randomly 10 random plants
 	public void addVegetal() {
 		for(int i=0;i<10;i++) {
 			if (Math.random()< 0.2) {
@@ -137,7 +163,8 @@ public class Simulation extends PApplet{
 			}
 		}
 	}
-
+	
+	//Add randomly 10 animals
 	public void addAnimal() {
 		for(int i=0;i<10;i++) {
 			int n = (int)random(5);
@@ -160,7 +187,18 @@ public class Simulation extends PApplet{
 			}
 		}
 	}
-
+	
+	/*
+	 * --------------------------------------------------------------------------
+	 */
+	
+	//Add a model in the hash
+	public void addModel(HashMap<String, PShape> hash, String filename) {
+		hash.put(filename+".obj", loadShape("models/"+filename+".obj"));
+		System.out.println("Loading "+filename+".obj ...");
+	}
+	
+	//Load OBJ models
 	public void loadModels(HashMap<String, PShape> hash) {
 		addModel(hash, "maison");
 		addModel(hash, "maison_destroy");
@@ -185,17 +223,13 @@ public class Simulation extends PApplet{
 		addModel(hash, "nuage1");
 		addModel(hash, "nuage2");
 	}
-
-	public void addModel(HashMap<String, PShape> hash, String filename) {
-		hash.put(filename+".obj", loadShape("models/"+filename+".obj"));
-		System.out.println("Loading "+filename+".obj ...");
-	}
-
+	
+	//Return OBJ as PShape associated with the name
 	public PShape getModel(String name) {
 		return this.models.get(name);
 	}
 
-	//Debug function
+	//DEBUG function : draw x,y,z axes
 	public void drawAxes() {
 		strokeWeight(10);
 		stroke(255,0,0);

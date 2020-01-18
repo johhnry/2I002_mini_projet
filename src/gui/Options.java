@@ -17,13 +17,17 @@ import vivant.animal.reptile.Serpent;
 import vivant.vegetal.Arbre;
 import vivant.vegetal.Fleur;
 
+/*
+ * Options is the class containing an instance of the ControlP5 UI library
+ * and is responsible for creating all the groups and elements
+ */
 public class Options {
 	private PApplet parent;
 	private Terrain terrain;
 	private ControlP5 cp5;
 	private int cursorY;
 
-	//Charts ressources
+	//Charts for resources
 	private Chart chartEau, chartAir, chartMineral, chartNourriture, chartRecensement;
 
 	public Options(PApplet parent, Terrain terrain, ControlP5 cp5, int cursorY) {
@@ -52,7 +56,7 @@ public class Options {
 		int strokeWeightC = 2;
 		int colorBckgC = parent.color(60);
 
-		//EAU----------------------------------------------------------------------
+		//WATER----------------------------------------------------------------------
 		chartEau = cp5.addChart("eau")
 				.setPosition(marginC,gapC)
 				.setSize(widthC , heightC)
@@ -103,7 +107,7 @@ public class Options {
 		chartMineral.getColor().setBackground(colorBckgC);
 		chartMineral.setStrokeWeight(strokeWeightC);
 
-		//NOURRITURE----------------------------------------------------------------------
+		//FOOD----------------------------------------------------------------------
 		chartNourriture = cp5.addChart("nourriture")
 				.setPosition(marginC,heightC*3+gapC*4)
 				.setSize(widthC , heightC)
@@ -120,7 +124,7 @@ public class Options {
 		chartNourriture.getColor().setBackground(colorBckgC);
 		chartNourriture.setStrokeWeight(strokeWeightC);
 
-		//RECENSEMENT----------------------------------------------------------------------
+		//GRAPHS----------------------------------------------------------------------
 		int alphaArea = 100;
 		chartRecensement = cp5.addChart("quantities")
 				.setPosition(marginC, heightC*4+gapC*5)
@@ -477,15 +481,15 @@ public class Options {
 	}
 
 	public void update() {
-
-		if (parent.frameCount%20==0) {
-			//Chart recensement
+		//Updates the charts every 20 frames
+		if ((parent.frameCount % 20) == 0) {
+			//Update the quantities
 			HashMap<String, Integer> hash = terrain.getHashQuantities();
 			for(Entry<String, Integer> entry : hash.entrySet()) {
 				chartRecensement.push(entry.getKey(), entry.getValue());
 			}
 
-			//Charts ressources
+			//Update resources charts
 			chartEau.push("quantite", (float)terrain.getEau().getQuantite());
 			chartEau.push("qualite", (float) terrain.getEau().getQualite() * Eau.getqtInitEau());
 
@@ -493,12 +497,10 @@ public class Options {
 			chartAir.push("qualite", (float) terrain.getAir().getQualite() * Air.getqtInitAir());
 
 			chartMineral.push("quantite", (float)terrain.getMineral().getQuantite());
-			chartMineral.push("qualite", (float) terrain.getMineral().getQualite() * 
-					Mineral.getqtInitMineral());
+			chartMineral.push("qualite", (float) terrain.getMineral().getQualite() * Mineral.getqtInitMineral());
 
 			chartNourriture.push("quantite", (float)terrain.getNourriture().getQuantite());
-			chartNourriture.push("qualite", (float) terrain.getNourriture().getQualite() * 
-					10000);
+			chartNourriture.push("qualite", (float) terrain.getNourriture().getQualite() * 10000);
 		}
 	}
 }

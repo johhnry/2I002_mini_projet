@@ -6,6 +6,9 @@ import processing.core.PShape;
 import terrain.Terrain;
 import main.Simulation;
 
+/*
+ * The Element class is the base class for every 3d object in the scene
+ */
 public abstract class Element {
 	protected PApplet parent;
 	protected Terrain terrain;
@@ -18,27 +21,29 @@ public abstract class Element {
 	public Element(PApplet parent, Terrain terrain, String filename, double theta, double phi) {
 		this.parent = parent;
 		this.terrain = terrain;
-		
+
+		//Load the .obj model
 		this.loadModel(filename);
 
 		this.theta = theta;
 		this.phi = phi;
 	}
 
+	//Constructor for spawning element at random location on the planet
 	public Element(PApplet parent, Terrain terrain, String filename) {
 		this(parent, terrain, filename, Math.random()*(Math.PI*2), Math.random()*(Math.PI*2));
 	}
 
 	public void display() {
-		if (model != null) {
-			parent.pushMatrix();
-			parent.rotateY((float) theta);
-			parent.rotateX((float) phi);
-			parent.rotateZ(-PConstants.HALF_PI+(float)orient); 
-			parent.translate(0, 0, (terrain.getRayon()+this.altitude));
-			parent.shape(model,0,0);
-			parent.popMatrix();
-		}
+		parent.pushMatrix();
+		
+		parent.rotateY((float) theta);
+		parent.rotateX((float) phi);
+		parent.rotateZ(-PConstants.HALF_PI + (float)orient); 
+		parent.translate(0, 0, (terrain.getRayon() + this.altitude));
+		parent.shape(model,0,0);
+		
+		parent.popMatrix();
 	}
 
 	public float getPhi() {
@@ -58,11 +63,12 @@ public abstract class Element {
 	public void setTheta(double d) {
 		this.theta = d;
 	}
-	
+
 	public void setOrient(double dirX, double dirY) {
 		this.orient = Math.atan(dirY/dirX);
 	}
 	
+	//Load the .obj model from the main simulation class
 	public void loadModel(String filename) {
 		this.model = ((Simulation)parent).getModel(filename);
 	}
